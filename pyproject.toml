@@ -71,7 +71,9 @@ unfixable = [
   'TRY',  # Autofixes for tryceratops possibly too aggressive
   'RUF',  # Autofixes for ruff-specific rules possibly too aggressive
 ]
-extend-exclude = ['*.ipynb']
+extend-exclude = [
+  '*.ipynb',
+] # Ruff support for Jupyter notebooks is still a bit sketchy
 
 [tool.ruff.flake8-quotes]
 inline-quotes = 'single'
