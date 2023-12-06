@@ -1,0 +1,113 @@
+# For a best-practices example see https://github.com/ipython/ipykernel/blob/main/pyproject.toml
+
+[tool.ruff]
+# Documentation            : https://beta.ruff.rs/docs
+# Extension for VS Code    : https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff
+# Extension for other IDEs : https://github.com/charliermarsh/ruff-lsp
+# NOTE: disable pycodestyle, pydocstyle, bandit and flake8 in your IDE since ruff includes these
+
+target-version = 'py39'
+
+select = [
+  # TODO: enable remaining checks
+  'I',  # isort (unused imports and sorting)
+  'N',  # pep8-naming
+  'F',  # pyflakes
+  'E',  # pycodestyle errors
+  'W',  # pycodestyle warnings
+  'UP', # pyupgrade (auto-upgrade to modern python syntax)
+  #'ERA', # eradicate (commented-out code)
+  'C90', # mccabe (complexity)
+  'TRY', # tryceratops (exception handling)
+  'PGH', # pygrep-hooks
+  'RUF', # Ruff-specific rules
+  'PLE', # Error
+  'PLW', # Warning
+  #'PLR', # Refactor
+  'YTT', # flake8-2020
+  'ANN', # flake8-annotations
+  'S',   # flake8-bandit
+  'BLE', # flake8-blind-except
+  'FBT', # flake8-boolean-trap
+  'B',   # flake8-bugbear
+  #'A',   # flake8-builtins
+  'COM', # flake8-commas
+  'C4',  # flake8-comprehensions
+  #'DTZ', # flake8-datetimez
+  'T10', # flake8-debugger
+  'EM',  # flake8-errmsg
+  'EXE', # flake8-executable
+  'ISC', # flake8-implicit-str-concat
+  'ICN', # flake8-import-conventions (python import conventions)
+  #'G',   # flake8-logging-format # wait for newer Python version, see https://stackoverflow.com/questions/54367975/python-3-7-logging-f-strings-vs
+  #'INP', # flake8-no-pep420
+  'PIE', # flake8-pie
+  #'T20', # flake8-print
+  #'PYI', # flake8-pyi
+  #'PT',  # flake8-pytest-style
+  'Q',   # flake8-quotes
+  'RET', # flake8-return
+  'SIM', # flake8-simplify
+  'TID', # flake8-tidy-imports
+  #'TCH', # flake8-type-checking
+  #'ARG', # flake8-unused-arguments
+  'PTH', # flake8-use-pathlib
+  'RSE', # flake8-raise
+  'SLF', # flake8-self
+
+  # 'D', # pydocstyle (conflicting rules: D203 and D211 -> alternative docstring styles: choose one, ignore the other))
+]
+ignore = [
+  'E501',   # Allow long lines in this repo -> allow markdown message formatting and documentation URLs
+  'TRY002', # Allow descriptive exception messages without defining custom exception classes for now
+  'TRY003', # Allow descriptive exception messages without defining custom exception classes for now
+  'ANN101', # Don't require type annotations for 'self', it's unambigous -> tooling will fix this in the near future
+  'ANN102', # Don't require type annotations for 'cls', it's unambigous -> tooling will fix this in the near future
+]
+unfixable = [
+  'B',    # Autofixing bugbear findings is a bit too aggressive
+  'F841', # Autofixing unused variables conservatively leaves right-hand-side intact, which is almost always incorrect
+  'SIM',  # Autofixes for flake8-simplify possibly too aggressive
+  'TRY',  # Autofixes for tryceratops possibly too aggressive
+  'RUF',  # Autofixes for ruff-specific rules possibly too aggressive
+]
+extend-exclude = ['*.ipynb']
+
+[tool.ruff.flake8-quotes]
+inline-quotes = 'single'
+
+[tool.ruff.flake8-unused-arguments]
+ignore-variadic-names = true # Ignore unused *args and **kwargs -> standard practice, required to disable positional arguments
+
+[tool.ruff.mccabe]
+max-complexity = 10
+
+[tool.ruff.per-file-ignores]
+'test_*.py' = [
+  'S101',   # Allow using assert statements in unit tests -> best practice
+  'ANN201', # Allow missing return type annotation in unit tests -> standard practice
+]
+'math.py' = ['S101'] # Allow assert statements for debugging, for now
+
+[tool.autopep8]
+max_line_length = 120
+ignore = 'E501'
+recursive = true
+aggressive = 3
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+# adopts = "-v --cov=index --cov-branch --cov-report html"
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = 3.9
+warn_unused_configs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+explicit_package_bases = true
+# mypy_path = "src:anyfloat"
+packages = ['anyfloat']
+
+[tool.pyright]
+reportTypedDictNotRequiredAccess = false
