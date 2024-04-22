@@ -16,18 +16,36 @@ $ torchrun --nproc_per_node=8 --nnodes=2 --node_rank=1 --master_addr=123.456.123
 (If your cluster does not have Infiniband interconnect prepend NCCL_IB_DISABLE=1)
 """
 
+# Put these 4 lines at the top of the main script, before any imports
+# FIXME: remove once https://github.com/pytorch/pytorch/issues/109489 is resolved
+from torch._inductor import utils
+utils._use_template_for_cuda = lambda x, y: True
+
+
+#print(f"{datetime.now()} train script starting")
+
 import os
 import time
 import math
 import pickle
 from contextlib import nullcontext
 
+import dill
+from pickle import HIGHEST_PROTOCOL
+
 import numpy as np
+
+#print(f"{datetime.now()} import torch starting")
 import torch
+#print(f"{datetime.now()} import torch finished")
+
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.distributed import init_process_group, destroy_process_group
 
 from model import GPTConfig, GPT
+
+
+#print(f"{datetime.now()} imports finished")
 
 # -----------------------------------------------------------------------------
 # default config values designed to train a gpt2 (124M) on OpenWebText
@@ -72,6 +90,8 @@ backend = 'nccl' # 'nccl', 'gloo', etc.
 device = 'cuda' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1' etc., or try 'mps' on macbooks
 dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else 'float16' # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
 compile = True # use PyTorch 2.0 to compile the model to be faster
+# seed
+seed_offset = 0
 # -----------------------------------------------------------------------------
 config_keys = [k for k,v in globals().items() if not k.startswith('_') and isinstance(v, (int, float, bool, str))]
 exec(open('configurator.py').read()) # overrides from command line or config file
@@ -88,7 +108,7 @@ if ddp:
     device = f'cuda:{ddp_local_rank}'
     torch.cuda.set_device(device)
     master_process = ddp_rank == 0 # this process will do logging, checkpointing etc.
-    seed_offset = ddp_rank # each process gets a different seed
+    seed_offset = seed_offset + ddp_rank # each process gets a different seed
     # world_size number of processes will be training simultaneously, so we can scale
     # down the desired gradient accumulation iterations per process proportionally
     assert gradient_accumulation_steps % ddp_world_size == 0
@@ -96,14 +116,13 @@ if ddp:
 else:
     # if not ddp, we are running on a single gpu, and one process
     master_process = True
-    seed_offset = 0
     ddp_world_size = 1
 tokens_per_iter = gradient_accumulation_steps * ddp_world_size * batch_size * block_size
 print(f"tokens per iteration will be: {tokens_per_iter:,}")
 
 if master_process:
     os.makedirs(out_dir, exist_ok=True)
-torch.manual_seed(1337 + seed_offset)
+torch.manual_seed(seed_offset)
 torch.backends.cuda.matmul.allow_tf32 = True # allow tf32 on matmul
 torch.backends.cudnn.allow_tf32 = True # allow tf32 on cudnn
 device_type = 'cuda' if 'cuda' in device else 'cpu' # for later use in torch.autocast
@@ -201,11 +220,22 @@ if init_from == 'resume':
     optimizer.load_state_dict(checkpoint['optimizer'])
 checkpoint = None # free up memory
 
+
 # compile the model
 if compile:
     print("compiling the model... (takes a ~minute)")
     unoptimized_model = model
-    model = torch.compile(model) # requires PyTorch 2.0
+    model = torch.compile(  model,
+                            fullgraph=True,
+                            dynamic=False,
+                            #mode='reduce-overhead',
+                            mode='max-autotune',
+                            #options={
+                            #    'max_autotune': True,
+                            #    'epilogue_fusion':True,
+                            #    'triton.cudagraphs':True,
+                            #}
+                        ) # requires PyTorch 2.0
 
 # wrap model into DDP container
 if ddp:
@@ -215,16 +245,40 @@ if ddp:
 @torch.no_grad()
 def estimate_loss():
     out = {}
+
+    #torch.cuda.synchronize()
+    #print(f"{datetime.now()} model.eval() starting")
+
     model.eval()
+
+    #torch.cuda.synchronize()
+    #print(f"{datetime.now()} model.eval() finished")
+
     for split in ['train', 'val']:
+
+        #torch.cuda.synchronize()
+        #print(f"{datetime.now()} loss eval starting")
+
         losses = torch.zeros(eval_iters)
         for k in range(eval_iters):
             X, Y = get_batch(split)
             with ctx:
                 logits, loss = model(X, Y)
             losses[k] = loss.item()
+
+        #torch.cuda.synchronize()
+        #print(f"{datetime.now()} loss eval finished")
+
         out[split] = losses.mean()
+
+    #torch.cuda.synchronize()
+    #print(f"{datetime.now()} model.train() starting")
+
     model.train()
+
+    #torch.cuda.synchronize()
+    #print(f"{datetime.now()} model.train() finished")
+
     return out
 
 # learning rate decay scheduler (cosine with warmup)
@@ -247,17 +301,29 @@ if wandb_log and master_process:
     wandb.init(project=wandb_project, name=wandb_run_name, config=config)
 
 # training loop
+#torch.cuda.synchronize()
+#print(f"{datetime.now()} get_batch() starting")
+
 X, Y = get_batch('train') # fetch the very first batch
+
+#torch.cuda.synchronize()
+#print(f"{datetime.now()} get_batch() finished")
+
 t0 = time.time()
 local_iter_num = 0 # number of iterations in the lifetime of this process
 raw_model = model.module if ddp else model # unwrap DDP container if needed
 running_mfu = -1.0
 while True:
+    #torch.cuda.synchronize()
+    #print(f"{datetime.now()} training loop starting")
 
     # determine and set the learning rate for this iteration
     lr = get_lr(iter_num) if decay_lr else learning_rate
     for param_group in optimizer.param_groups:
         param_group['lr'] = lr
+
+    #torch.cuda.synchronize()
+    #print(f"{datetime.now()} estimate_loss() starting")
 
     # evaluate the loss on train/val sets and write checkpoints
     if iter_num % eval_interval == 0 and master_process:
@@ -274,6 +340,8 @@ while True:
         if losses['val'] < best_val_loss or always_save_checkpoint:
             best_val_loss = losses['val']
             if iter_num > 0:
+                #torch.cuda.synchronize()
+                #print(f"{datetime.now()} saving checkpoint starting")
                 checkpoint = {
                     'model': raw_model.state_dict(),
                     'optimizer': optimizer.state_dict(),
@@ -282,8 +350,14 @@ while True:
                     'best_val_loss': best_val_loss,
                     'config': config,
                 }
-                print(f"saving checkpoint to {out_dir}")
-                torch.save(checkpoint, os.path.join(out_dir, 'ckpt.pt'))
+                #print(f"{datetime.now()} torch.save checkpoint to {out_dir}")
+                torch.save(checkpoint, os.path.join(out_dir, 'ckpt.pt'), pickle_module=dill, pickle_protocol=HIGHEST_PROTOCOL)
+                #torch.cuda.synchronize()
+                #print(f"{datetime.now()} saving checkpoint finished")
+
+        #torch.cuda.synchronize()
+        #print(f"{datetime.now()} estimate_loss() finished")
+
     if iter_num == 0 and eval_only:
         break
 
@@ -302,7 +376,14 @@ while True:
         # immediately async prefetch next batch while model is doing the forward pass on the GPU
         X, Y = get_batch('train')
         # backward pass, with gradient scaling if training in fp16
+
+        #torch.cuda.synchronize()
+        #print(f"{datetime.now()} backward() starting")
         scaler.scale(loss).backward()
+
+        #torch.cuda.synchronize()
+        #print(f"{datetime.now()} backward() finished")
+
     # clip the gradient
     if grad_clip != 0.0:
         scaler.unscale_(optimizer)
@@ -314,6 +395,7 @@ while True:
     optimizer.zero_grad(set_to_none=True)
 
     # timing and logging
+    torch.cuda.synchronize()
     t1 = time.time()
     dt = t1 - t0
     t0 = t1
@@ -324,7 +406,7 @@ while True:
         if local_iter_num >= 5: # let the training loop settle a bit
             mfu = raw_model.estimate_mfu(batch_size * gradient_accumulation_steps, dt)
             running_mfu = mfu if running_mfu == -1.0 else 0.9*running_mfu + 0.1*mfu
-        print(f"iter {iter_num}: loss {lossf:.4f}, time {dt*1000:.2f}ms, mfu {running_mfu*100:.2f}%")
+        print(f"iter {iter_num}: loss {lossf:.6f}, time {dt*1000:.2f}ms, mfu {running_mfu*100:.2f}%")
     iter_num += 1
     local_iter_num += 1
 
