@@ -93,6 +93,7 @@ ignore = [
     "ANN001", # Allow missing param type annotations during refactor
     "ANN201", # Allow missing return type annotations during refactor
     "ANN206", # Allow missing return type annotations during refactor
+    "A001",   # Allow shadowing built-in names during refactor
     "A002",   # Allow shadowing built-in names during refactor
     "ERA001", # Allow commented-out code during refactor
 ]
