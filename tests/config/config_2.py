@@ -14,6 +14,8 @@ gradient_accumulation_steps = 1
 batch_size = 64
 block_size = 64
 
+bias = False
+
 n_layer = 4
 n_head = 4
 n_embd = 128

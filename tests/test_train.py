@@ -1,9 +1,10 @@
-import subprocess
-import re
-from pydantic import BaseModel
-import pytest
 import math
 import os
+import re
+import subprocess
+
+import pytest
+from pydantic import BaseModel
 
 
 class Result(BaseModel):
@@ -12,16 +13,16 @@ class Result(BaseModel):
     time: float
 
 
-@pytest.fixture
+@pytest.fixture()
 def results(request: pytest.FixtureRequest) -> list[Result]:
     # Run python train.py tests/config/config_1.py and capture its output
-    cmd = f"python3 train.py {request.param}"
 
     os.environ["TORCHINDUCTOR_FX_GRAPH_CACHE"] = "1"
     process = subprocess.run(
-        cmd,
+        f"python3 train.py {request.param}",
         check=True,
-        shell=True,
+        # Use active virtualenv in current shell
+        shell=True,  # noqa: S602
         capture_output=True,
         text=True,
         timeout=120,
@@ -33,7 +34,8 @@ def results(request: pytest.FixtureRequest) -> list[Result]:
     results: list[Result] = []
     for line in output.split("\n"):
         match = re.search(
-            r"iter (\d+): loss (\d+\.\d+), time (\d+\.\d+)ms, mfu (-?\d+\.\d+)%", line
+            r"iter (\d+): loss (\d+\.\d+), time (\d+\.\d+)ms, mfu (-?\d+\.\d+)%",
+            line,
         )
         if match:
             r = Result(
@@ -48,7 +50,7 @@ def results(request: pytest.FixtureRequest) -> list[Result]:
 
 # @pytest.mark.flaky
 @pytest.mark.parametrize(
-    "results, expected",
+    ("results", "expected"),
     [
         (
             "tests/config/config_1.py",
@@ -71,15 +73,20 @@ def results(request: pytest.FixtureRequest) -> list[Result]:
                 Result(iter=20, loss=2.93995, time=4.5),
             ],
         ),
+        (
+            "tests/config/config_4.py",
+            [
+                Result(iter=0, loss=4.176258, time=215),
+                Result(iter=20, loss=3.006874, time=8.5),
+            ],
+        ),
     ],
     indirect=["results"],
 )
 def test_train(results, expected):
-    print(results)
-    print(expected)
     assert len(results) == len(expected)
 
-    for r, e in zip(results, expected):
+    for r, e in zip(results, expected, strict=True):
         assert r.iter == e.iter
         assert math.isclose(r.loss, e.loss, rel_tol=2e-5)
         assert math.isclose(r.time, e.time, rel_tol=0.2)
