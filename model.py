@@ -13,19 +13,8 @@ from dataclasses import dataclass
 
 import torch
 from torch import nn
-from torch.nn import functional as F
-
-
-class LayerNorm(nn.Module):
-    """LayerNorm but with an optional bias. PyTorch doesn't support simply bias=False."""
-
-    def __init__(self, ndim, bias) -> None:
-        super().__init__()
-        self.weight = nn.Parameter(torch.ones(ndim))
-        self.bias = nn.Parameter(torch.zeros(ndim)) if bias else None
-
-    def forward(self, input):
-        return F.layer_norm(input, self.weight.shape, self.weight, self.bias, 1e-5)
+from torch.nn import LayerNorm
+from torch.nn import functional as F  # noqa: N812
 
 
 class CausalSelfAttention(nn.Module):
@@ -58,7 +47,8 @@ class CausalSelfAttention(nn.Module):
             )
 
     def forward(self, x):
-        B, T, C = x.size()  # batch size, sequence length, embedding dimensionality (n_embd)
+        # batch size, sequence length, embedding dimensionality (n_embd)
+        B, T, C = x.size()  # noqa: N806
 
         # calculate query, key, values for all heads in batch and move head forward to be the batch dim
         q, k, v = self.c_attn(x).split(self.n_embd, dim=2)
@@ -171,7 +161,7 @@ class GPT(nn.Module):
 
         # report number of parameters
 
-    def get_num_params(self, non_embedding=True):
+    def get_num_params(self, non_embedding=True):  # noqa: FBT002
         """Return the number of parameters in the model.
         For non-embedding count (default), the position embeddings get subtracted.
         The token embeddings would too, except due to the parameter sharing these
@@ -324,9 +314,9 @@ class GPT(nn.Module):
         """Estimate model flops utilization (MFU) in units of A100 bfloat16 peak FLOPS."""
         # first estimate the number of flops we do per iteration.
         # see PaLM paper Appendix B as ref: https://arxiv.org/abs/2204.02311
-        N = self.get_num_params()
+        N = self.get_num_params()  # noqa: N806
         cfg = self.config
-        L, H, Q, T = cfg.n_layer, cfg.n_head, cfg.n_embd // cfg.n_head, cfg.block_size
+        L, H, Q, T = cfg.n_layer, cfg.n_head, cfg.n_embd // cfg.n_head, cfg.block_size  # noqa: N806
         flops_per_token = 6 * N + 12 * L * H * Q * T
         flops_per_fwdbwd = flops_per_token * T
         flops_per_iter = flops_per_fwdbwd * fwdbwd_per_iter
