@@ -89,15 +89,18 @@ ignore = [
     "TD002",  # Don't require author for TODOs
     "TRY002", # Allow descriptive exception messages without defining custom exception classes for now
     "TRY003", # Allow descriptive exception messages without defining custom exception classes for now
-    "D",      # Allow missing docstrings during refactor
-    "ANN001", # Allow missing param type annotations during refactor
-    "ANN201", # Allow missing return type annotations during refactor
-    "ANN206", # Allow missing return type annotations during refactor
-    "A001",   # Allow shadowing built-in names during refactor
-    "A002",   # Allow shadowing built-in names during refactor
-    "ERA001", # Allow commented-out code during refactor
-    "T201",   # Allow print statements during refactor
-    "S101",   # Allow using assert statements during refactor
+    # Ignored during refactor phase:
+    "D",      # Allow missing docstrings
+    "ANN001", # Allow missing param type annotations
+    "ANN201", # Allow missing return type annotations
+    "ANN206", # Allow missing return type annotations
+    "A001",   # Allow shadowing built-in names
+    "A002",   # Allow shadowing built-in names
+    "ERA001", # Allow commented-out code
+    "T201",   # Allow print statements
+    "S101",   # Allow using assert statements
+    "TD003",  # Allow TODOs without an issue number
+    "FIX002", # Allow TODOs
 ]
 unfixable = [
     "B",      # Autofixing bugbear findings is a bit too aggressive

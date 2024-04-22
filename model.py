@@ -118,11 +118,13 @@ class Block(nn.Module):
 @dataclass
 class GPTConfig:
     block_size: int
-    vocab_size: int  # GPT-2 vocab_size of 50257, padded up to nearest multiple of 64 for efficiency
+    # TODO: handle padding vocab_size to neaerest multiple of 64 somewhere
+    vocab_size: int
     n_layer: int
     n_head: int
     n_embd: int
     dropout: float
+    # TODO: separate bias for Linear and LayerNorm
     bias: bool  # True: bias in Linears and LayerNorms, like GPT-2. False: a bit better and faster
 
 
@@ -152,6 +154,7 @@ class GPT(nn.Module):
 
         # init all weights
         self.apply(self._init_weights)
+
         # apply special scaled init to the residual projections, per GPT-2 paper
         for pn, p in self.named_parameters():
             if pn.endswith("c_proj.weight"):
@@ -160,9 +163,6 @@ class GPT(nn.Module):
                     mean=0.0,
                     std=0.02 / math.sqrt(2 * config.n_layer),
                 )
-
-        # report number of parameters
-        print(f"number of parameters: {self.get_num_params() / 1e6:.2f}M")
 
     def get_num_params(self, non_embedding=True):  # noqa: FBT002
         """
