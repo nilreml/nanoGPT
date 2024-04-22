@@ -97,6 +97,7 @@ ignore = [
     "A002",   # Allow shadowing built-in names during refactor
     "ERA001", # Allow commented-out code during refactor
     "T201",   # Allow print statements during refactor
+    "S101",   # Allow using assert statements during refactor
 ]
 unfixable = [
     "B",      # Autofixing bugbear findings is a bit too aggressive
