@@ -96,6 +96,7 @@ ignore = [
     "A001",   # Allow shadowing built-in names during refactor
     "A002",   # Allow shadowing built-in names during refactor
     "ERA001", # Allow commented-out code during refactor
+    "T201",   # Allow print statements during refactor
 ]
 unfixable = [
     "B",      # Autofixing bugbear findings is a bit too aggressive
@@ -104,6 +105,7 @@ unfixable = [
     #"RUF",    # Autofixes for ruff-specific rules possibly too aggressive
     #"SIM", # Autofixes for flake8-simplify possibly too aggressive
     "TRY", # Autofixes for tryceratops possibly too aggressive
+    "T20", # Autofixes for print statements confusing
 ]
 
 [tool.ruff.lint.extend-per-file-ignores]
