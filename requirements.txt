@@ -7,3 +7,4 @@ wandb
 tqdm
 pytest
 pytest-retry
+pytest-benchmark

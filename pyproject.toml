@@ -1,10 +1,10 @@
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 markers = ["flaky"]
-
+#addopts = "--maxfail=1"
 
 [tool.ruff]
-# Documentation            : https://beta.ruff.rs/docs
+# Ruff documentation       : https://docs.astral.sh/ruff
 # Extension for VS Code    : https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff
 # Extension for other IDEs : https://github.com/charliermarsh/ruff-lsp
 # NOTE: disable pycodestyle, pydocstyle, bandit and flake8 linters in your IDE since ruff includes these
@@ -13,10 +13,9 @@ line-length = 120
 unsafe-fixes = true
 
 [tool.ruff.lint]
-# Documentation: https://docs.astral.sh/ruff/settings/#lint
-# All rules: https://docs.astral.sh/ruff/rules
-mccabe.max-complexity = 10
+# Rule documentation: https://docs.astral.sh/ruff/rules
 pydocstyle.convention = "google"
+mccabe.max-complexity = 10
 flake8-unused-arguments.ignore-variadic-names = true # Ignore unused *args and **kwargs -> standard practice
 select = [
     "A",     # flake8-builtins
@@ -111,6 +110,7 @@ unfixable = [
     "TRY", # Autofixes for tryceratops possibly too aggressive
     "T20", # Autofixes for print statements confusing
 ]
+fixable = ["ALL"]
 
 [tool.ruff.lint.extend-per-file-ignores]
 "tests/*" = [

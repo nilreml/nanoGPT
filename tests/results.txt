@@ -1,0 +1,278 @@
+
+2024-04-24 13:59:34.298615 [Result(iter=0, loss=4.236855, time=246.92), Result(iter=20, loss=3.037239, time=8.76)]
+2024-04-24 13:59:36.046311 [Result(iter=0, loss=4.210068, time=252.08), Result(iter=20, loss=3.100468, time=8.71)]
+2024-04-24 13:59:37.847687 [Result(iter=0, loss=4.176258, time=258.34), Result(iter=20, loss=3.006874, time=8.81)]
+2024-04-24 13:59:52.265894 [Result(iter=0, loss=4.21489, time=12602.35), Result(iter=20, loss=2.939944, time=4.0)]
+
+2024-04-24 13:59:59.799518 [Result(iter=0, loss=4.236855, time=254.86), Result(iter=20, loss=3.037239, time=7.37)]
+2024-04-24 14:00:01.592121 [Result(iter=0, loss=4.210068, time=254.94), Result(iter=20, loss=3.100468, time=9.82)]
+2024-04-24 14:00:03.380131 [Result(iter=0, loss=4.176258, time=262.39), Result(iter=20, loss=3.006874, time=9.21)]
+2024-04-24 14:00:10.031524 [Result(iter=0, loss=4.21489, time=4966.97), Result(iter=20, loss=2.939997, time=4.0)]
+
+2024-04-24 14:00:19.874862 [Result(iter=0, loss=4.236855, time=252.51), Result(iter=20, loss=3.037239, time=8.83)]
+2024-04-24 14:00:21.653406 [Result(iter=0, loss=4.210068, time=258.38), Result(iter=20, loss=3.100468, time=9.2)]
+2024-04-24 14:00:23.454579 [Result(iter=0, loss=4.176258, time=262.33), Result(iter=20, loss=3.006874, time=10.17)]
+2024-04-24 14:00:30.038524 [Result(iter=0, loss=4.21489, time=4893.41), Result(iter=20, loss=2.939954, time=4.13)]
+
+2024-04-24 14:01:13.862210 [Result(iter=0, loss=4.236855, time=250.15), Result(iter=20, loss=3.037239, time=8.87)]
+2024-04-24 14:01:15.625306 [Result(iter=0, loss=4.210068, time=253.48), Result(iter=20, loss=3.100468, time=8.06)]
+2024-04-24 14:01:17.407632 [Result(iter=0, loss=4.176258, time=260.46), Result(iter=20, loss=3.006874, time=8.94)]
+2024-04-24 14:01:23.963201 [Result(iter=0, loss=4.21489, time=4876.42), Result(iter=20, loss=2.939904, time=4.28)]
+
+2024-04-24 14:01:29.417984 [Result(iter=0, loss=4.236855, time=248.78), Result(iter=20, loss=3.037239, time=8.76)]
+2024-04-24 14:01:31.199406 [Result(iter=0, loss=4.210068, time=253.11), Result(iter=20, loss=3.100468, time=9.81)]
+2024-04-24 14:01:32.995667 [Result(iter=0, loss=4.176258, time=258.53), Result(iter=20, loss=3.006874, time=10.1)]
+2024-04-24 14:01:39.467984 [Result(iter=0, loss=4.21489, time=4798.89), Result(iter=20, loss=2.93995, time=3.98)]
+
+2024-04-24 14:02:59.023958 [Result(iter=0, loss=4.236855, time=264.17), Result(iter=20, loss=3.037239, time=7.99)]
+2024-04-24 14:03:00.796550 [Result(iter=0, loss=4.210068, time=255.37), Result(iter=20, loss=3.100468, time=9.35)]
+2024-04-24 14:03:02.606867 [Result(iter=0, loss=4.176258, time=263.29), Result(iter=20, loss=3.006874, time=10.09)]
+2024-04-24 14:03:09.190497 [Result(iter=0, loss=4.21489, time=4896.62), Result(iter=20, loss=2.9399, time=4.06)]
+
+
+
+
+
+
+
+2024-04-24 17:06:31.022354 [Result(iter=0, loss=4.236855, time=242.6), Result(iter=20, loss=3.037239, time=9.3)]
+2024-04-24 17:06:32.769048 [Result(iter=0, loss=4.210068, time=243.67), Result(iter=20, loss=3.100468, time=9.21)]
+2024-04-24 17:06:34.513086 [Result(iter=0, loss=4.176258, time=239.55), Result(iter=20, loss=3.006874, time=11.27)]
+2024-04-24 17:06:41.100651 [Result(iter=0, loss=4.21489, time=4910.42), Result(iter=20, loss=2.939939, time=4.11)]
+
+2024-04-24 17:06:51.901323 [Result(iter=0, loss=4.236855, time=241.5), Result(iter=20, loss=3.037239, time=7.83)]
+2024-04-24 17:06:53.652514 [Result(iter=0, loss=4.210068, time=244.9), Result(iter=20, loss=3.100468, time=10.24)]
+2024-04-24 17:06:55.422811 [Result(iter=0, loss=4.176258, time=249.18), Result(iter=20, loss=3.006874, time=9.51)]
+2024-04-24 17:07:01.919905 [Result(iter=0, loss=4.21489, time=4846.79), Result(iter=20, loss=2.939914, time=3.93)]
+
+2024-04-24 17:24:12.836819 [Result(iter=0, loss=4.236855, time=240.98), Result(iter=20, loss=3.037239, time=8.84)]
+2024-04-24 17:24:14.600456 [Result(iter=0, loss=4.210068, time=242.97), Result(iter=20, loss=3.100468, time=9.25)]
+2024-04-24 17:24:16.362220 [Result(iter=0, loss=4.176258, time=252.43), Result(iter=20, loss=3.006874, time=10.25)]
+2024-04-24 17:24:22.897943 [Result(iter=0, loss=4.21489, time=4854.61), Result(iter=20, loss=2.939919, time=4.16)]
+
+2024-04-24 17:24:35.271862 [Result(iter=0, loss=4.236855, time=243.33), Result(iter=20, loss=3.037239, time=7.69)]
+2024-04-24 17:24:37.027748 [Result(iter=0, loss=4.210068, time=247.5), Result(iter=20, loss=3.100468, time=9.23)]
+2024-04-24 17:24:38.801563 [Result(iter=0, loss=4.176258, time=249.21), Result(iter=20, loss=3.006874, time=10.52)]
+2024-04-24 17:24:45.408608 [Result(iter=0, loss=4.21489, time=4931.66), Result(iter=20, loss=2.939862, time=4.01)]
+
+2024-04-24 17:39:11.966469 [Result(iter=0, loss=4.236855, time=254.47), Result(iter=20, loss=3.037239, time=7.82)]
+2024-04-24 17:39:13.720157 [Result(iter=0, loss=4.210068, time=253.65), Result(iter=20, loss=3.100468, time=9.18)]
+2024-04-24 17:39:15.469565 [Result(iter=0, loss=4.176258, time=257.89), Result(iter=20, loss=3.006874, time=8.75)]
+2024-04-24 17:39:22.096703 [Result(iter=0, loss=4.21489, time=4952.64), Result(iter=20, loss=2.939954, time=4.14)]
+
+with options:
+2024-04-24 17:41:03.342125 [Result(iter=0, loss=4.236855, time=240.61), Result(iter=20, loss=3.037239, time=9.07)]
+2024-04-24 17:41:05.085465 [Result(iter=0, loss=4.210068, time=242.96), Result(iter=20, loss=3.100468, time=9.2)]
+2024-04-24 17:41:06.863010 [Result(iter=0, loss=4.176258, time=250.82), Result(iter=20, loss=3.006874, time=10.74)]
+2024-04-24 17:41:19.126987 [Result(iter=0, loss=4.21489, time=10595.45), Result(iter=20, loss=2.939943, time=6.45)]
+
+2024-04-24 17:41:25.887700 [Result(iter=0, loss=4.236855, time=241.54), Result(iter=20, loss=3.037239, time=10.24)]
+2024-04-24 17:41:27.652042 [Result(iter=0, loss=4.210068, time=244.16), Result(iter=20, loss=3.100468, time=9.26)]
+2024-04-24 17:41:29.428877 [Result(iter=0, loss=4.176258, time=250.39), Result(iter=20, loss=3.006874, time=11.34)]
+2024-04-24 17:41:35.922649 [Result(iter=0, loss=4.21489, time=4899.05), Result(iter=20, loss=2.939867, time=6.31)]
+
+2024-04-24 17:43:12.371171 [Result(iter=0, loss=4.236855, time=247.57), Result(iter=20, loss=3.037239, time=8.51)]
+2024-04-24 17:43:14.109763 [Result(iter=0, loss=4.210068, time=250.99), Result(iter=20, loss=3.100468, time=8.31)]
+2024-04-24 17:43:15.869849 [Result(iter=0, loss=4.176258, time=253.44), Result(iter=20, loss=3.006874, time=10.02)]
+2024-04-24 17:43:22.227762 [Result(iter=0, loss=4.21489, time=4788.12), Result(iter=20, loss=2.939953, time=5.69)]
+
+2024-04-24 17:43:32.065076 [Result(iter=0, loss=4.236855, time=245.44), Result(iter=20, loss=3.037239, time=8.85)]
+2024-04-24 17:43:33.839928 [Result(iter=0, loss=4.210068, time=250.52), Result(iter=20, loss=3.100468, time=10.49)]
+2024-04-24 17:43:35.637676 [Result(iter=0, loss=4.176258, time=254.7), Result(iter=20, loss=3.006874, time=11.56)]
+2024-04-24 17:43:42.008646 [Result(iter=0, loss=4.21489, time=4771.81), Result(iter=20, loss=2.939901, time=7.79)]
+
+with options:
+"max_autotune": True,
+# "epilogue_fusion":True,
+"triton.cudagraphs":True,
+2024-04-24 17:44:43.057709 [Result(iter=0, loss=4.236855, time=254.78), Result(iter=20, loss=3.037239, time=8.86)]
+2024-04-24 17:44:44.834016 [Result(iter=0, loss=4.210068, time=253.58), Result(iter=20, loss=3.100468, time=10.45)]
+2024-04-24 17:44:46.626463 [Result(iter=0, loss=4.176258, time=252.92), Result(iter=20, loss=3.006874, time=11.46)]
+2024-04-24 17:44:53.157054 [Result(iter=0, loss=4.21489, time=4839.96), Result(iter=20, loss=2.939898, time=4.11)]
+
+2024-04-24 17:45:42.906236 [Result(iter=0, loss=4.236855, time=251.63), Result(iter=20, loss=3.037239, time=10.1)]
+2024-04-24 17:45:44.683038 [Result(iter=0, loss=4.210068, time=258.35), Result(iter=20, loss=3.100468, time=9.18)]
+2024-04-24 17:45:46.481985 [Result(iter=0, loss=4.176258, time=262.22), Result(iter=20, loss=3.006874, time=9.24)]
+2024-04-24 17:45:52.941094 [Result(iter=0, loss=4.21489, time=4794.37), Result(iter=20, loss=2.939907, time=3.98)]
+
+with options:
+"max_autotune": True,
+"epilogue_fusion":True,
+"triton.cudagraphs":True,
+
+2024-04-24 17:46:28.742806 [Result(iter=0, loss=4.236855, time=252.65), Result(iter=20, loss=3.037239, time=10.05)]
+2024-04-24 17:46:30.516011 [Result(iter=0, loss=4.210068, time=251.85), Result(iter=20, loss=3.100468, time=10.48)]
+2024-04-24 17:46:32.313472 [Result(iter=0, loss=4.176258, time=259.72), Result(iter=20, loss=3.006874, time=11.49)]
+2024-04-24 17:46:38.888668 [Result(iter=0, loss=4.21489, time=4887.78), Result(iter=20, loss=2.939851, time=4.04)]
+
+2024-04-24 17:46:44.206126 [Result(iter=0, loss=4.236855, time=252.77), Result(iter=20, loss=3.037239, time=8.85)]
+2024-04-24 17:46:45.962202 [Result(iter=0, loss=4.210068, time=250.96), Result(iter=20, loss=3.100468, time=8.01)]
+2024-04-24 17:46:47.749078 [Result(iter=0, loss=4.176258, time=259.23), Result(iter=20, loss=3.006874, time=8.83)]
+2024-04-24 17:46:54.243154 [Result(iter=0, loss=4.21489, time=4829.33), Result(iter=20, loss=2.939941, time=4.0)]
+
+2024-04-24 17:48:21.636113 [Result(iter=0, loss=4.236855, time=253.53), Result(iter=20, loss=3.037239, time=9.96)]
+2024-04-24 17:48:23.454581 [Result(iter=0, loss=4.210068, time=257.24), Result(iter=20, loss=3.100468, time=10.54)]
+2024-04-24 17:48:25.241120 [Result(iter=0, loss=4.176258, time=254.28), Result(iter=20, loss=3.006874, time=10.01)]
+2024-04-24 17:48:39.600075 [Result(iter=0, loss=4.214901, time=12568.79), Result(iter=20, loss=2.939921, time=4.04)]
+
+2024-04-24 17:48:45.586290 [Result(iter=0, loss=4.236855, time=251.76), Result(iter=20, loss=3.037239, time=10.07)]
+2024-04-24 17:48:47.353069 [Result(iter=0, loss=4.210068, time=254.89), Result(iter=20, loss=3.100468, time=9.19)]
+2024-04-24 17:48:49.151422 [Result(iter=0, loss=4.176258, time=262.36), Result(iter=20, loss=3.006874, time=11.22)]
+2024-04-24 17:48:55.626547 [Result(iter=0, loss=4.214901, time=4811.4), Result(iter=20, loss=2.939963, time=4.01)]
+
+2024-04-24 17:49:05.103468 [Result(iter=0, loss=4.236855, time=250.75), Result(iter=20, loss=3.037239, time=8.78)]
+2024-04-24 17:49:06.866036 [Result(iter=0, loss=4.210068, time=255.72), Result(iter=20, loss=3.100468, time=9.18)]
+2024-04-24 17:49:08.644004 [Result(iter=0, loss=4.176258, time=257.89), Result(iter=20, loss=3.006874, time=11.22)]
+2024-04-24 17:49:15.103369 [Result(iter=0, loss=4.214901, time=4779.07), Result(iter=20, loss=2.939891, time=4.04)]
+
+2024-04-24 17:56:40.159952 [Result(iter=0, loss=4.236855, time=247.71), Result(iter=20, loss=3.037239, time=8.8)]
+2024-04-24 17:56:41.917659 [Result(iter=0, loss=4.210068, time=250.7), Result(iter=20, loss=3.100468, time=10.61)]
+2024-04-24 17:56:43.740169 [Result(iter=0, loss=4.176258, time=260.17), Result(iter=20, loss=3.006874, time=9.99)]
+2024-04-24 17:56:55.972985 [Result(iter=0, loss=4.214901, time=10452.14), Result(iter=20, loss=2.939901, time=4.24)]
+
+2024-04-24 17:57:01.068622 [Result(iter=0, loss=4.236855, time=244.65), Result(iter=20, loss=3.037239, time=8.8)]
+2024-04-24 17:57:02.818203 [Result(iter=0, loss=4.210068, time=248.04), Result(iter=20, loss=3.100468, time=9.21)]
+2024-04-24 17:57:04.605485 [Result(iter=0, loss=4.176258, time=253.66), Result(iter=20, loss=3.006874, time=11.48)]
+2024-04-24 17:57:11.066052 [Result(iter=0, loss=4.214901, time=4807.91), Result(iter=20, loss=2.93989, time=3.99)]
+
+2024-04-24 17:57:17.819243 [Result(iter=0, loss=4.236855, time=247.93), Result(iter=20, loss=3.037239, time=10.02)]
+2024-04-24 17:57:19.579615 [Result(iter=0, loss=4.210068, time=248.63), Result(iter=20, loss=3.100468, time=9.34)]
+2024-04-24 17:57:21.376424 [Result(iter=0, loss=4.176258, time=258.94), Result(iter=20, loss=3.006874, time=11.7)]
+2024-04-24 17:57:27.876798 [Result(iter=0, loss=4.214901, time=4830.26), Result(iter=20, loss=2.939906, time=4.16)]
+
+2024-04-24 17:58:07.794247 [Result(iter=0, loss=4.236855, time=251.38), Result(iter=20, loss=3.037239, time=10.04)]
+2024-04-24 17:58:09.583861 [Result(iter=0, loss=4.210068, time=254.94), Result(iter=20, loss=3.100468, time=10.47)]
+2024-04-24 17:58:11.377982 [Result(iter=0, loss=4.176258, time=259.01), Result(iter=20, loss=3.006874, time=11.53)]
+2024-04-24 17:58:23.466483 [Result(iter=0, loss=4.21489, time=10284.62), Result(iter=20, loss=2.939883, time=4.12)]
+
+2024-04-24 17:58:28.829934 [Result(iter=0, loss=4.236855, time=252.65), Result(iter=20, loss=3.037239, time=8.89)]
+2024-04-24 17:58:30.624127 [Result(iter=0, loss=4.210068, time=256.02), Result(iter=20, loss=3.100468, time=10.61)]
+2024-04-24 17:58:32.426154 [Result(iter=0, loss=4.176258, time=260.75), Result(iter=20, loss=3.006874, time=11.5)]
+2024-04-24 17:58:39.000273 [Result(iter=0, loss=4.21489, time=4881.58), Result(iter=20, loss=2.939956, time=4.13)]
+
+2024-04-24 18:00:20.657972 [Result(iter=0, loss=4.236855, time=247.26), Result(iter=20, loss=3.037239, time=8.01)]
+2024-04-24 18:00:22.427252 [Result(iter=0, loss=4.210068, time=251.16), Result(iter=20, loss=3.100468, time=9.24)]
+2024-04-24 18:00:24.211677 [Result(iter=0, loss=4.176258, time=257.89), Result(iter=20, loss=3.006874, time=10.94)]
+2024-04-24 18:00:36.564044 [Result(iter=0, loss=4.21489, time=10552.7), Result(iter=20, loss=2.939917, time=4.15)]
+
+2024-04-24 18:00:42.870135 [Result(iter=0, loss=4.236855, time=247.1), Result(iter=20, loss=3.037239, time=8.01)]
+2024-04-24 18:00:44.646131 [Result(iter=0, loss=4.210068, time=253.3), Result(iter=20, loss=3.100468, time=9.34)]
+2024-04-24 18:00:46.421055 [Result(iter=0, loss=4.176258, time=260.3), Result(iter=20, loss=3.006874, time=9.17)]
+2024-04-24 18:00:53.069175 [Result(iter=0, loss=4.21489, time=4953.86), Result(iter=20, loss=2.939897, time=4.16)]
+
+2024-04-24 18:04:28.771622 [Result(iter=0, loss=4.236855, time=244.34), Result(iter=20, loss=3.037239, time=8.81)]
+2024-04-24 18:04:30.511494 [Result(iter=0, loss=4.210068, time=254.17), Result(iter=20, loss=3.100468, time=7.78)]
+2024-04-24 18:04:32.294187 [Result(iter=0, loss=4.176258, time=255.56), Result(iter=20, loss=3.006874, time=10.49)]
+2024-04-24 18:04:44.463989 [Result(iter=0, loss=4.21489, time=10385.48), Result(iter=20, loss=2.939992, time=4.06)]
+
+2024-04-24 18:04:49.365738 [Result(iter=0, loss=4.236855, time=247.09), Result(iter=20, loss=3.037239, time=8.85)]
+2024-04-24 18:04:51.132381 [Result(iter=0, loss=4.210068, time=250.3), Result(iter=20, loss=3.100468, time=9.24)]
+2024-04-24 18:04:52.909898 [Result(iter=0, loss=4.176258, time=254.31), Result(iter=20, loss=3.006874, time=10.02)]
+2024-04-24 18:04:59.481902 [Result(iter=0, loss=4.21489, time=4896.49), Result(iter=20, loss=2.939861, time=4.15)]
+
+2024-04-24 18:05:05.912221 [Result(iter=0, loss=4.236855, time=249.33), Result(iter=20, loss=3.037239, time=7.81)]
+2024-04-24 18:05:07.674881 [Result(iter=0, loss=4.210068, time=251.96), Result(iter=20, loss=3.100468, time=9.24)]
+2024-04-24 18:05:09.464491 [Result(iter=0, loss=4.176258, time=255.22), Result(iter=20, loss=3.006874, time=9.97)]
+2024-04-24 18:05:16.057065 [Result(iter=0, loss=4.21489, time=4928.11), Result(iter=20, loss=2.939971, time=4.19)]
+
+2024-04-24 18:06:16.056604 [Result(iter=0, loss=4.236855, time=248.62), Result(iter=20, loss=3.037239, time=8.86)]
+2024-04-24 18:06:17.810830 [Result(iter=0, loss=4.210068, time=248.62), Result(iter=20, loss=3.100468, time=9.14)]
+2024-04-24 18:06:19.582594 [Result(iter=0, loss=4.176258, time=255.43), Result(iter=20, loss=3.006874, time=11.27)]
+2024-04-24 18:06:31.985927 [Result(iter=0, loss=4.21489, time=10617.49), Result(iter=20, loss=2.939966, time=4.09)]
+
+2024-04-24 18:06:37.494235 [Result(iter=0, loss=4.236855, time=251.28), Result(iter=20, loss=3.037239, time=9.96)]
+2024-04-24 18:06:39.259415 [Result(iter=0, loss=4.210068, time=254.83), Result(iter=20, loss=3.100468, time=8.54)]
+2024-04-24 18:06:41.033832 [Result(iter=0, loss=4.176258, time=259.04), Result(iter=20, loss=3.006874, time=8.8)]
+2024-04-24 18:06:47.646556 [Result(iter=0, loss=4.21489, time=4937.82), Result(iter=20, loss=2.939936, time=4.05)]
+
+2024-04-24 18:06:56.717278 [Result(iter=0, loss=4.236855, time=250.23), Result(iter=20, loss=3.037239, time=8.77)]
+2024-04-24 18:06:58.471988 [Result(iter=0, loss=4.210068, time=251.18), Result(iter=20, loss=3.100468, time=9.22)]
+2024-04-24 18:07:00.236508 [Result(iter=0, loss=4.176258, time=255.49), Result(iter=20, loss=3.006874, time=8.71)]
+2024-04-24 18:07:06.800236 [Result(iter=0, loss=4.21489, time=4892.84), Result(iter=20, loss=2.939948, time=4.0)]
+
+2024-04-24 18:09:17.020864 [Result(iter=0, loss=4.236855, time=251.32), Result(iter=20, loss=3.037239, time=7.81)]
+2024-04-24 18:09:18.795603 [Result(iter=0, loss=4.210068, time=256.5), Result(iter=20, loss=3.100468, time=9.2)]
+2024-04-24 18:09:20.597869 [Result(iter=0, loss=4.176258, time=260.22), Result(iter=20, loss=3.006874, time=10.08)]
+2024-04-24 18:09:32.822982 [Result(iter=0, loss=4.21489, time=10437.85), Result(iter=20, loss=2.939904, time=3.99)]
+
+2024-04-24 18:09:45.136747 [Result(iter=0, loss=4.236855, time=252.06), Result(iter=20, loss=3.037239, time=8.75)]
+2024-04-24 18:09:46.891764 [Result(iter=0, loss=4.210068, time=254.42), Result(iter=20, loss=3.100468, time=8.55)]
+2024-04-24 18:09:48.691557 [Result(iter=0, loss=4.176258, time=260.72), Result(iter=20, loss=3.006874, time=10.03)]
+2024-04-24 18:09:55.323804 [Result(iter=0, loss=4.21489, time=4941.66), Result(iter=20, loss=2.939931, time=4.22)]
+
+2024-04-24 18:10:04.728456 [Result(iter=0, loss=4.236855, time=252.03), Result(iter=20, loss=3.037239, time=8.94)]
+2024-04-24 18:10:06.516757 [Result(iter=0, loss=4.210068, time=255.58), Result(iter=20, loss=3.100468, time=9.19)]
+2024-04-24 18:10:08.321351 [Result(iter=0, loss=4.176258, time=260.46), Result(iter=20, loss=3.006874, time=10.17)]
+2024-04-24 18:10:14.854636 [Result(iter=0, loss=4.21489, time=4859.47), Result(iter=20, loss=2.939922, time=4.01)]
+
+2024-04-24 18:17:31.708394 [Result(iter=0, loss=4.236855, time=248.84), Result(iter=20, loss=3.037239, time=8.84)]
+2024-04-24 18:17:33.481863 [Result(iter=0, loss=4.210068, time=254.81), Result(iter=20, loss=3.100468, time=8.49)]
+2024-04-24 18:17:35.276878 [Result(iter=0, loss=4.176258, time=257.83), Result(iter=20, loss=3.006874, time=10.08)]
+2024-04-24 18:17:41.865493 [Result(iter=0, loss=4.21489, time=4898.76), Result(iter=20, loss=2.939915, time=4.06)]
+
+
+2024-04-24 19:26:00.647922 [Result(iter=0, loss=4.236855, time=251.55), Result(iter=40, loss=2.735917, time=9.99)]
+2024-04-24 19:26:02.582083 [Result(iter=0, loss=4.210068, time=253.67), Result(iter=40, loss=2.846786, time=9.91)]
+2024-04-24 19:26:04.580373 [Result(iter=0, loss=4.176258, time=258.36), Result(iter=40, loss=2.690615, time=10.04)]
+2024-04-24 19:26:11.231163 [Result(iter=0, loss=4.21489, time=4904.58), Result(iter=40, loss=2.65635, time=4.0)]
+
+2024-04-24 19:26:16.790062 [Result(iter=0, loss=4.236855, time=248.27), Result(iter=40, loss=2.735917, time=8.84)]
+2024-04-24 19:26:18.742023 [Result(iter=0, loss=4.210068, time=253.52), Result(iter=40, loss=2.846786, time=9.22)]
+2024-04-24 19:26:20.734143 [Result(iter=0, loss=4.176258, time=256.22), Result(iter=40, loss=2.690615, time=9.97)]
+2024-04-24 19:26:27.349219 [Result(iter=0, loss=4.21489, time=4859.22), Result(iter=40, loss=2.656271, time=3.97)]
+
+2024-04-24 19:26:32.095521 [Result(iter=0, loss=4.236855, time=250.0), Result(iter=40, loss=2.735917, time=8.86)]
+2024-04-24 19:26:34.058833 [Result(iter=0, loss=4.210068, time=253.36), Result(iter=40, loss=2.846786, time=9.25)]
+2024-04-24 19:26:36.049200 [Result(iter=0, loss=4.176258, time=256.59), Result(iter=40, loss=2.690615, time=11.08)]
+2024-04-24 19:26:42.667868 [Result(iter=0, loss=4.21489, time=4874.98), Result(iter=40, loss=2.656325, time=3.99)]
+
+
+2024-04-24 19:29:39.674782 [Result(iter=0, loss=4.236855, time=258.82), Result(iter=80, loss=2.549376, time=8.85)]
+2024-04-24 19:29:41.994526 [Result(iter=0, loss=4.210068, time=249.19), Result(iter=80, loss=2.570952, time=9.11)]
+2024-04-24 19:29:44.441123 [Result(iter=0, loss=4.176258, time=259.89), Result(iter=80, loss=2.575707, time=10.37)]
+2024-04-24 19:29:51.400163 [Result(iter=0, loss=4.21489, time=4980.49), Result(iter=80, loss=2.526529, time=4.18)]
+
+2024-04-24 19:30:15.901031 [Result(iter=0, loss=4.236855, time=253.56), Result(iter=80, loss=2.549376, time=8.91)]
+2024-04-24 19:30:18.256535 [Result(iter=0, loss=4.210068, time=257.2), Result(iter=80, loss=2.570952, time=8.84)]
+2024-04-24 19:30:20.683220 [Result(iter=0, loss=4.176258, time=258.28), Result(iter=80, loss=2.575707, time=8.82)]
+2024-04-24 19:30:27.612451 [Result(iter=0, loss=4.21489, time=4960.77), Result(iter=80, loss=2.526479, time=4.25)]
+
+2024-04-24 19:30:37.104252 [Result(iter=0, loss=4.236855, time=254.82), Result(iter=80, loss=2.549376, time=8.86)]
+2024-04-24 19:30:39.483534 [Result(iter=0, loss=4.210068, time=256.05), Result(iter=80, loss=2.570952, time=9.2)]
+2024-04-24 19:30:41.922708 [Result(iter=0, loss=4.176258, time=260.08), Result(iter=80, loss=2.575707, time=10.13)]
+2024-04-24 19:30:48.733978 [Result(iter=0, loss=4.21489, time=4870.38), Result(iter=80, loss=2.526556, time=4.0)]
+
+2024-04-24 19:31:02.718840 [Result(iter=0, loss=4.236855, time=260.32), Result(iter=80, loss=2.549376, time=8.77)]
+2024-04-24 19:31:05.078214 [Result(iter=0, loss=4.210068, time=259.13), Result(iter=80, loss=2.570952, time=9.36)]
+2024-04-24 19:31:07.497011 [Result(iter=0, loss=4.176258, time=260.41), Result(iter=80, loss=2.575707, time=10.11)]
+2024-04-24 19:31:14.385636 [Result(iter=0, loss=4.21489, time=4928.47), Result(iter=80, loss=2.526619, time=4.17)]
+
+2024-04-24 19:32:31.395110 [Result(iter=0, loss=4.236855, time=253.31), Result(iter=80, loss=2.549376, time=8.84)]
+2024-04-24 19:32:33.766759 [Result(iter=0, loss=4.210068, time=256.43), Result(iter=80, loss=2.570952, time=9.21)]
+2024-04-24 19:32:36.211509 [Result(iter=0, loss=4.176258, time=262.42), Result(iter=80, loss=2.575707, time=10.14)]
+2024-04-24 19:32:43.097139 [Result(iter=0, loss=4.21489, time=4915.58), Result(iter=80, loss=2.526521, time=4.18)]
+
+2024-04-24 19:32:50.193381 [Result(iter=0, loss=4.236855, time=249.3), Result(iter=80, loss=2.549376, time=9.68)]
+2024-04-24 19:32:52.533966 [Result(iter=0, loss=4.210068, time=254.26), Result(iter=80, loss=2.570952, time=9.25)]
+2024-04-24 19:32:54.929433 [Result(iter=0, loss=4.176258, time=258.32), Result(iter=80, loss=2.575707, time=10.38)]
+2024-04-24 19:33:01.870466 [Result(iter=0, loss=4.21489, time=4980.24), Result(iter=80, loss=2.526603, time=4.16)]
+
+2024-04-25 18:55:51.754921 [Result(iter=0, loss=4.236855, time=280.53), Result(iter=80, loss=2.549376, time=8.72)]
+2024-04-25 18:55:54.022555 [Result(iter=0, loss=4.210068, time=243.56), Result(iter=80, loss=2.570952, time=9.16)]
+2024-04-25 18:55:56.354273 [Result(iter=0, loss=4.176258, time=251.94), Result(iter=80, loss=2.575707, time=8.61)]
+2024-04-25 18:57:00.034319 [Result(iter=0, loss=4.214891, time=61649.97), Result(iter=80, loss=2.526623, time=4.12)]
+
+2024-04-25 20:57:43.018641 [Result(iter=0, loss=4.236855, time=236.67), Result(iter=80, loss=2.549376, time=7.62)]
+2024-04-25 20:57:45.240567 [Result(iter=0, loss=4.210068, time=239.52), Result(iter=80, loss=2.570952, time=8.02)]
+2024-04-25 20:57:47.534137 [Result(iter=0, loss=4.176258, time=242.44), Result(iter=80, loss=2.575707, time=9.96)]
+2024-04-25 20:57:54.068915 [Result(iter=0, loss=4.214891, time=4666.12), Result(iter=80, loss=2.526553, time=4.06)]
+
+2024-04-25 21:02:14.643199 [Result(iter=0, loss=4.236855, time=236.25), Result(iter=80, loss=2.549376, time=9.93)]
+2024-04-25 21:02:16.894818 [Result(iter=0, loss=4.210068, time=236.1), Result(iter=80, loss=2.570952, time=9.06)]
+2024-04-25 21:02:19.138957 [Result(iter=0, loss=4.176258, time=244.24), Result(iter=80, loss=2.575707, time=8.7)]
+2024-04-25 21:02:25.797462 [Result(iter=0, loss=4.214891, time=4768.38), Result(iter=80, loss=2.526542, time=4.11)]
+
+2024-04-25 21:29:55.308797 [Result(iter=0, loss=4.236855, time=237.78), Result(iter=80, loss=2.549376, time=8.71)]
+2024-04-25 21:29:57.568478 [Result(iter=0, loss=4.210068, time=240.41), Result(iter=80, loss=2.570952, time=9.1)]
+2024-04-25 21:29:59.834126 [Result(iter=0, loss=4.176258, time=246.79), Result(iter=80, loss=2.575707, time=9.2)]
+2024-04-25 21:30:06.532602 [Result(iter=0, loss=4.214891, time=4787.71), Result(iter=80, loss=2.526489, time=4.14)]

@@ -1,7 +1,7 @@
 out_dir = "/tmp/nanogpt/out-shakespeare-char"
 eval_interval = 250
 eval_iters = 20
-log_interval = 20
+log_interval = 40
 
 always_save_checkpoint = False
 
@@ -22,7 +22,7 @@ n_embd = 128
 dropout = 0.2
 
 learning_rate = 1e-3
-max_iters = 20
+max_iters = 80
 lr_decay_iters = max_iters
 min_lr = learning_rate / 10
 beta2 = 0.95
