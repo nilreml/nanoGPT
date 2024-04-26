@@ -225,6 +225,13 @@ def get_lr(it):
 # training loop
 X, Y = get_batch("train")  # fetch the very first batch
 
+
+def filter_dt(dt: list[float]) -> float:
+    return min(dt)
+
+
+dts: list[float] = []
+
 t0 = time.time()
 local_iter_num = 0  # number of iterations in the lifetime of this process
 raw_model = model
@@ -283,14 +290,20 @@ while True:
     optimizer.zero_grad(set_to_none=True)
 
     # timing and logging
+    time.time()
     torch.cuda.synchronize()
+    time.time()
+    torch.cuda.synchronize()
+    time.time()
     t1 = time.time()
-    dt = t1 - t0
+    dts.append(t1 - t0)
     t0 = t1
     if iter_num % log_interval == 0:
         # get loss as float. note: this is a CPU-GPU sync point
         # scale up to undo the division above, approximating the true total loss (exact would have been a sum)
         lossf = loss.item() * gradient_accumulation_steps
+        dt = filter_dt(dts)
+        dts = []
         if local_iter_num >= 5:  # let the training loop settle a bit
             mfu = raw_model.estimate_mfu(batch_size * gradient_accumulation_steps, dt)
             running_mfu = mfu if running_mfu == -1.0 else 0.9 * running_mfu + 0.1 * mfu

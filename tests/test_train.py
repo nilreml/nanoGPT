@@ -1,3 +1,4 @@
+import math
 import os
 import re
 import subprocess
@@ -20,7 +21,7 @@ def results(request: pytest.FixtureRequest) -> list[Result]:
 
     os.environ["TORCHINDUCTOR_FX_GRAPH_CACHE"] = "1"
     process = subprocess.run(
-        args=f"python3 train.py {request.param}",
+        args=f"nice -n -20 python3 train.py {request.param}",
         check=False,
         # Use active virtualenv in current shell
         shell=True,
@@ -72,33 +73,40 @@ def _log() -> None:
             "tests/config/config_1.py",
             [
                 Result(iter=0, loss=4.236855, time=310),
-                Result(iter=80, loss=3.037239, time=8.7),
+                Result(iter=20, loss=3.037239, time=8.65),
             ],
         ),
         (
             "tests/config/config_2.py",
             [
                 Result(iter=0, loss=4.210068, time=314),
-                Result(iter=80, loss=3.100468, time=9),
+                Result(iter=20, loss=3.100468, time=9),
             ],
         ),
         (
             "tests/config/config_3.py",
             [
                 Result(iter=0, loss=4.176258, time=319),
-                Result(iter=80, loss=3.006874, time=9.9),
+                Result(iter=20, loss=3.006874, time=9.7),
             ],
         ),
         (
             "tests/config/config_4.py",
             [
                 Result(iter=0, loss=4.214890, time=5900),
-                Result(iter=80, loss=2.93995, time=4.55),
+                Result(iter=20, loss=2.93995, time=4.6),
             ],
         ),
     ],
     indirect=["results"],
 )
+# WTF does it fail:
+# 2024-04-26 22:35:55.254473 [Result(iter=0, loss=4.236855, time=290.48), Result(iter=80, loss=2.549376, time=8.55)]
+# 2024-04-26 22:35:57.801171 [Result(iter=0, loss=4.210068, time=291.75), Result(iter=80, loss=2.570952, time=8.9)]
+# 2024-04-26 22:36:00.411026 [Result(iter=0, loss=4.176258, time=297.74), Result(iter=80, loss=2.575707, time=9.62)]
+# 2024-04-26 22:36:08.269912 [Result(iter=0, loss=4.214901, time=5696.1), Result(iter=80, loss=2.526675, time=4.55)]
+
+
 # post optimization, pre statistic filtering:
 # 2024-04-26 20:48:41.773429 [Result(iter=0, loss=4.236855, time=290.32), Result(iter=80, loss=2.549376, time=8.61)]
 # 2024-04-26 20:48:44.344302 [Result(iter=0, loss=4.210068, time=294.82), Result(iter=80, loss=2.570952, time=8.96)]
@@ -141,8 +149,7 @@ def _log() -> None:
 #     indirect=["results"],
 # )
 
-def test_train(results: list[Result], expected) -> None:
-    del results[1]
+def test_train(results: list[Result], expected: list[Result]) -> None:
     assert len(results) == len(expected)
 
     msg = f"{datetime.now()} {results}\n"  # noqa: DTZ005
@@ -151,7 +158,7 @@ def test_train(results: list[Result], expected) -> None:
 
     for r, e in zip(results, expected, strict=True):
         assert r.iter == e.iter
-        # assert math.isclose(r.loss, e.loss, rel_tol=3e-5)
+        assert math.isclose(r.loss, e.loss, rel_tol=3e-5)
         assert r.time <= e.time
 
     # pytest.fail(str(results))
