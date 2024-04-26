@@ -71,34 +71,76 @@ def _log() -> None:
         (
             "tests/config/config_1.py",
             [
-                Result(iter=0, loss=4.236855, time=265),
-                Result(iter=80, loss=3.037239, time=22),
+                Result(iter=0, loss=4.236855, time=310),
+                Result(iter=80, loss=3.037239, time=8.7),
             ],
         ),
         (
             "tests/config/config_2.py",
             [
-                Result(iter=0, loss=4.210068, time=265),
-                Result(iter=80, loss=3.100468, time=22),
+                Result(iter=0, loss=4.210068, time=314),
+                Result(iter=80, loss=3.100468, time=9),
             ],
         ),
         (
             "tests/config/config_3.py",
             [
-                Result(iter=0, loss=4.176258, time=265),
-                Result(iter=80, loss=3.006874, time=22),
+                Result(iter=0, loss=4.176258, time=319),
+                Result(iter=80, loss=3.006874, time=9.9),
             ],
         ),
         (
             "tests/config/config_4.py",
             [
-                Result(iter=0, loss=4.214890, time=5200),
-                Result(iter=80, loss=2.93995, time=11),
+                Result(iter=0, loss=4.214890, time=5900),
+                Result(iter=80, loss=2.93995, time=4.55),
             ],
         ),
     ],
     indirect=["results"],
 )
+# post optimization, pre statistic filtering:
+# 2024-04-26 20:48:41.773429 [Result(iter=0, loss=4.236855, time=290.32), Result(iter=80, loss=2.549376, time=8.61)]
+# 2024-04-26 20:48:44.344302 [Result(iter=0, loss=4.210068, time=294.82), Result(iter=80, loss=2.570952, time=8.96)]
+# 2024-04-26 20:48:46.960198 [Result(iter=0, loss=4.176258, time=299.05), Result(iter=80, loss=2.575707, time=9.64)]
+# 2024-04-26 20:48:54.876659 [Result(iter=0, loss=4.2149 , time=5739.05), Result(iter=80, loss=2.526495, time=4.52)]
+
+# @pytest.mark.usefixtures("_log")
+# @pytest.mark.parametrize(
+#     ("results", "expected"),
+#     [
+#         (
+#             "tests/config/config_1.py",
+#             [
+#                 Result(iter=0, loss=4.236855, time=265),
+#                 Result(iter=80, loss=3.037239, time=22),
+#             ],
+#         ),
+#         (
+#             "tests/config/config_2.py",
+#             [
+#                 Result(iter=0, loss=4.210068, time=265),
+#                 Result(iter=80, loss=3.100468, time=22),
+#             ],
+#         ),
+#         (
+#             "tests/config/config_3.py",
+#             [
+#                 Result(iter=0, loss=4.176258, time=265),
+#                 Result(iter=80, loss=3.006874, time=22),
+#             ],
+#         ),
+#         (
+#             "tests/config/config_4.py",
+#             [
+#                 Result(iter=0, loss=4.214890, time=5200),
+#                 Result(iter=80, loss=2.93995, time=11),
+#             ],
+#         ),
+#     ],
+#     indirect=["results"],
+# )
+
 def test_train(results: list[Result], expected) -> None:
     del results[1]
     assert len(results) == len(expected)
