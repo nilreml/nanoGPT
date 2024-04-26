@@ -55,3 +55,23 @@ run-to-run variance ~ 1%
 2024-04-26 23:35:22.921322 [Result(iter=0, loss=4.210068, time=295.11), Result(iter=20, loss=3.100468, time=8.89)]
 2024-04-26 23:35:24.951462 [Result(iter=0, loss=4.176258, time=299.57), Result(iter=20, loss=3.006874, time=9.55)]
 2024-04-26 23:35:32.528037 [Result(iter=0, loss=4.214901, time=5669.78), Result(iter=20, loss=2.93988, time=4.55)]
+
+2024-04-26 23:37:01.022209 [Result(iter=0, loss=4.236855, time=288.66), Result(iter=20, loss=3.037239, time=8.49)]
+2024-04-26 23:37:03.041963 [Result(iter=0, loss=4.210068, time=292.93), Result(iter=20, loss=3.100468, time=8.86)]
+2024-04-26 23:37:05.065195 [Result(iter=0, loss=4.176258, time=296.66), Result(iter=20, loss=3.006874, time=9.54)]
+2024-04-26 23:37:12.674924 [Result(iter=0, loss=4.214901, time=5717.36), Result(iter=20, loss=2.939946, time=4.53)]
+
+2024-04-26 23:37:16.214259 [Result(iter=0, loss=4.236855, time=286.67), Result(iter=20, loss=3.037239, time=8.5)]
+2024-04-26 23:37:18.214436 [Result(iter=0, loss=4.210068, time=292.98), Result(iter=20, loss=3.100468, time=8.88)]
+2024-04-26 23:37:20.259109 [Result(iter=0, loss=4.176258, time=302.06), Result(iter=20, loss=3.006874, time=9.76)]
+2024-04-26 23:37:27.874678 [Result(iter=0, loss=4.214901, time=5706.8), Result(iter=20, loss=2.939851, time=4.54)]
+
+2024-04-26 23:37:31.012986 [Result(iter=0, loss=4.236855, time=287.37), Result(iter=20, loss=3.037239, time=8.52)]
+2024-04-26 23:37:33.019138 [Result(iter=0, loss=4.210068, time=292.21), Result(iter=20, loss=3.100468, time=8.95)]
+2024-04-26 23:37:35.048107 [Result(iter=0, loss=4.176258, time=299.66), Result(iter=20, loss=3.006874, time=9.63)]
+2024-04-26 23:37:42.668653 [Result(iter=0, loss=4.214901, time=5716.85), Result(iter=20, loss=2.939918, time=4.54)]
+
+2024-04-26 23:37:46.945270 [Result(iter=0, loss=4.236855, time=290.21), Result(iter=20, loss=3.037239, time=8.52)]
+2024-04-26 23:37:48.949693 [Result(iter=0, loss=4.210068, time=291.37), Result(iter=20, loss=3.100468, time=8.84)]
+2024-04-26 23:37:50.983838 [Result(iter=0, loss=4.176258, time=298.88), Result(iter=20, loss=3.006874, time=9.63)]
+2024-04-26 23:37:58.606042 [Result(iter=0, loss=4.214901, time=5721.24), Result(iter=20, loss=2.939911, time=4.54)]
