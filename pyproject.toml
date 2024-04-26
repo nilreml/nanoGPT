@@ -1,6 +1,6 @@
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-markers = ["flaky"]
+#markers = ["flaky"]
 #addopts = "--maxfail=1"
 
 [tool.ruff]
@@ -13,7 +13,7 @@ line-length = 120
 unsafe-fixes = true
 
 [tool.ruff.lint]
-# Rule documentation: https://docs.astral.sh/ruff/rules
+# Linter rule documentation: https://docs.astral.sh/ruff/rules
 pydocstyle.convention = "google"
 mccabe.max-complexity = 10
 flake8-unused-arguments.ignore-variadic-names = true # Ignore unused *args and **kwargs -> standard practice

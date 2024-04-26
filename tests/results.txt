@@ -45,3 +45,13 @@ run-to-run variance ~ 1%
 2024-04-26 23:24:00.746896 [Result(iter=0, loss=4.210068, time=292.21), Result(iter=20, loss=3.100468, time=8.99)]
 2024-04-26 23:24:02.785643 [Result(iter=0, loss=4.176258, time=296.44), Result(iter=20, loss=3.006874, time=9.59)]
 2024-04-26 23:24:10.353216 [Result(iter=0, loss=4.214901, time=5664.42), Result(iter=20, loss=2.939892, time=4.53)]
+
+2024-04-26 23:34:38.528071 [Result(iter=0, loss=4.236855, time=287.28), Result(iter=20, loss=3.037239, time=8.58)]
+2024-04-26 23:34:40.526345 [Result(iter=0, loss=4.210068, time=290.77), Result(iter=20, loss=3.100468, time=8.88)]
+2024-04-26 23:34:42.562810 [Result(iter=0, loss=4.176258, time=298.85), Result(iter=20, loss=3.006874, time=9.6)]
+2024-04-26 23:34:50.163970 [Result(iter=0, loss=4.214901, time=5691.41), Result(iter=20, loss=2.939951, time=4.54)]
+
+2024-04-26 23:35:20.892061 [Result(iter=0, loss=4.236855, time=286.73), Result(iter=20, loss=3.037239, time=8.56)]
+2024-04-26 23:35:22.921322 [Result(iter=0, loss=4.210068, time=295.11), Result(iter=20, loss=3.100468, time=8.89)]
+2024-04-26 23:35:24.951462 [Result(iter=0, loss=4.176258, time=299.57), Result(iter=20, loss=3.006874, time=9.55)]
+2024-04-26 23:35:32.528037 [Result(iter=0, loss=4.214901, time=5669.78), Result(iter=20, loss=2.93988, time=4.55)]
