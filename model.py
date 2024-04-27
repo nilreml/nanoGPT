@@ -13,8 +13,7 @@ from typing import Self
 
 import torch
 from pydantic import BaseModel, model_validator
-from torch import nn
-from torch.nn import LayerNorm
+from torch import Tensor, nn
 from torch.nn import functional as F  # noqa: N812
 
 
@@ -71,10 +70,10 @@ class CausalSelfAttention(nn.Module):
                 persistent=False,
             )
 
-    def forward(self, x):
+    def forward(self, x: Tensor):
         # batch size, sequence length, embedding dimensionality (n_embd)
         B, T, C = x.size()  # noqa: N806
-
+        x.tril()
         # calculate query, key, values for all heads in batch and move head forward to be the batch dim
         q, k, v = self.c_attn(x).split(self.n_embd, dim=2)
         k = k.view(B, T, self.n_head, C // self.n_head).transpose(1, 2)  # (B, nh, T, hs)
@@ -123,9 +122,9 @@ class MLP(nn.Module):
 class Block(nn.Module):
     def __init__(self, config: GPTConfig) -> None:
         super().__init__()
-        self.ln_1 = LayerNorm(config.n_embd, bias=config.bias)
+        self.ln_1 = nn.LayerNorm(config.n_embd, bias=config.bias)
         self.attn = CausalSelfAttention(config)
-        self.ln_2 = LayerNorm(config.n_embd, bias=config.bias)
+        self.ln_2 = nn.LayerNorm(config.n_embd, bias=config.bias)
         self.mlp = MLP(config)
 
     def forward(self, x):
@@ -144,7 +143,7 @@ class GPT(nn.Module):
                 "wpe": nn.Embedding(config.block_size, config.n_embd),
                 "drop": nn.Dropout(config.dropout),
                 "h": nn.ModuleList([Block(config) for _ in range(config.n_layer)]),
-                "ln_f": LayerNorm(config.n_embd, bias=config.bias),
+                "ln_f": nn.LayerNorm(config.n_embd, bias=config.bias),
             },
         )
         self.lm_head = nn.Linear(config.n_embd, config.vocab_size, bias=False)
