@@ -92,8 +92,10 @@ def _log() -> None:
         (
             "tests/config/config_4.py",
             [
-                Result(iter=0, loss=4.214890, time=5900),
-                Result(iter=20, loss=2.93995, time=4.6),
+                Result(iter=0, loss=4.215, time=5900),
+                Result(iter=20, loss=2.93995, time=3.6),
+                # Result(iter=0, loss=4.214890, time=5900),  # pytorch 2.2
+                # Result(iter=20, loss=2.93995, time=4.6),   # pytorch 2.2
             ],
         ),
     ],
@@ -108,7 +110,7 @@ def test_train(results: list[Result], expected: list[Result]) -> None:
 
     for r, e in zip(results, expected, strict=True):
         assert r.iter == e.iter
-        assert math.isclose(r.loss, e.loss, rel_tol=3e-5)
+        assert math.isclose(r.loss, e.loss, rel_tol=5e-5)
         assert r.time <= e.time
 
     # pytest.fail(str(results))

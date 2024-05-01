@@ -8,3 +8,4 @@ tqdm
 pytest
 pytest-retry
 pytest-benchmark
+pydantic

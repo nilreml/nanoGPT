@@ -74,4 +74,92 @@ run-to-run variance ~ 1%
 2024-04-26 23:37:46.945270 [Result(iter=0, loss=4.236855, time=290.21), Result(iter=20, loss=3.037239, time=8.52)]
 2024-04-26 23:37:48.949693 [Result(iter=0, loss=4.210068, time=291.37), Result(iter=20, loss=3.100468, time=8.84)]
 2024-04-26 23:37:50.983838 [Result(iter=0, loss=4.176258, time=298.88), Result(iter=20, loss=3.006874, time=9.63)]
-2024-04-26 23:37:58.606042 [Result(iter=0, loss=4.214901, time=5721.24), Result(iter=20, loss=2.939911, time=4.54)]
+2024-04-26 23:37:58.606042 [Result(iter=0, loss=4.214901, time=5721.24), Result(iter=20, loss=2.939911, time=4.54)]  <-
+
+pytorch 2.3:
+2024-04-27 14:57:05.695043 [Result(iter=0, loss=4.236855, time=302.05), Result(iter=20, loss=3.037256, time=7.76)]
+2024-04-27 14:57:07.851742 [Result(iter=0, loss=4.210068, time=304.62), Result(iter=20, loss=3.100464, time=8.06)]
+2024-04-27 14:57:10.040402 [Result(iter=0, loss=4.176258, time=310.52), Result(iter=20, loss=3.006781, time=8.85)]
+2024-04-27 14:57:46.065277 [Result(iter=0, loss=4.215122, time=33821.88), Result(iter=20, loss=2.940029, time=3.5)]  <- 130% iter/s
+
+2024-04-27 14:58:17.355901 [Result(iter=0, loss=4.236855, time=306.4), Result(iter=20, loss=3.037256, time=7.71)]
+2024-04-27 14:58:19.510790 [Result(iter=0, loss=4.210068, time=309.91), Result(iter=20, loss=3.100464, time=8.02)]
+2024-04-27 14:58:21.696467 [Result(iter=0, loss=4.176258, time=317.76), Result(iter=20, loss=3.006781, time=8.95)]
+2024-04-27 14:58:29.193297 [Result(iter=0, loss=4.215122, time=5443.43), Result(iter=20, loss=2.940022, time=3.5)]   <- 130% iter/s
+
+pytorch 2.3, max-autotune:
+2024-04-27 15:03:06.115835 [Result(iter=0, loss=4.236855, time=305.24), Result(iter=20, loss=3.037256, time=7.75)]
+2024-04-27 15:03:08.335181 [Result(iter=0, loss=4.210068, time=309.27), Result(iter=20, loss=3.100464, time=8.1)]
+2024-04-27 15:03:10.590853 [Result(iter=0, loss=4.176258, time=315.54), Result(iter=20, loss=3.006781, time=8.83)]
+2024-04-27 15:03:26.345859 [Result(iter=0, loss=4.21513, time=13522.95), Result(iter=20, loss=2.940021, time=3.3)]  <-
+
+2024-04-27 15:06:45.135103 [Result(iter=0, loss=4.236855, time=303.65), Result(iter=20, loss=3.037256, time=7.69)]
+2024-04-27 15:06:47.394944 [Result(iter=0, loss=4.210068, time=310.13), Result(iter=20, loss=3.100464, time=8.17)]
+2024-04-27 15:06:49.614044 [Result(iter=0, loss=4.176258, time=314.16), Result(iter=20, loss=3.006781, time=8.79)]
+2024-04-27 15:06:57.357788 [Result(iter=0, loss=4.21513, time=5650.23), Result(iter=20, loss=2.940015, time=3.36)]  <-
+
+2024-04-27 15:07:04.641614 [Result(iter=0, loss=4.236855, time=305.38), Result(iter=20, loss=3.037256, time=7.73)]
+2024-04-27 15:07:06.856070 [Result(iter=0, loss=4.210068, time=308.89), Result(iter=20, loss=3.100464, time=8.13)]
+2024-04-27 15:07:09.076780 [Result(iter=0, loss=4.176258, time=313.85), Result(iter=20, loss=3.006781, time=8.8)]
+2024-04-27 15:07:16.812009 [Result(iter=0, loss=4.21513, time=5638.82), Result(iter=20, loss=2.93997, time=3.32)]   <-
+
+2024-04-27 15:30:25.279043 [Result(iter=0, loss=4.236855, time=308.14), Result(iter=20, loss=3.037256, time=7.63)]
+2024-04-27 15:30:27.496725 [Result(iter=0, loss=4.210068, time=308.11), Result(iter=20, loss=3.100464, time=8.13)]
+2024-04-27 15:30:29.723673 [Result(iter=0, loss=4.176258, time=314.44), Result(iter=20, loss=3.006781, time=8.88)]
+2024-04-27 15:30:48.613816 [Result(iter=0, loss=4.215122, time=16670.02), Result(iter=20, loss=2.939978, time=3.38)]
+
+2024-04-27 15:31:06.931284 [Result(iter=0, loss=4.236855, time=304.69), Result(iter=20, loss=3.037256, time=7.76)]
+2024-04-27 15:31:09.135258 [Result(iter=0, loss=4.210068, time=309.01), Result(iter=20, loss=3.100464, time=8.15)]
+2024-04-27 15:31:11.357352 [Result(iter=0, loss=4.176258, time=314.86), Result(iter=20, loss=3.006781, time=8.78)]
+2024-04-27 15:31:19.117291 [Result(iter=0, loss=4.215122, time=5656.78), Result(iter=20, loss=2.93994, time=3.35)]
+
+2024-04-27 15:35:41.905264 [Result(iter=0, loss=4.236855, time=303.85), Result(iter=20, loss=3.037256, time=7.7)]
+2024-04-27 15:35:44.113880 [Result(iter=0, loss=4.210068, time=309.42), Result(iter=20, loss=3.100464, time=8.1)]
+2024-04-27 15:35:46.348580 [Result(iter=0, loss=4.176258, time=315.16), Result(iter=20, loss=3.006781, time=8.83)]
+2024-04-27 15:35:54.063196 [Result(iter=0, loss=4.215122, time=5624.72), Result(iter=20, loss=2.939863, time=3.33)]
+
+2024-04-27 15:49:28.660380 [Result(iter=0, loss=4.236855, time=309.54), Result(iter=20, loss=3.037256, time=7.73)]
+2024-04-27 15:49:30.874734 [Result(iter=0, loss=4.210068, time=309.24), Result(iter=20, loss=3.100464, time=8.1)]
+2024-04-27 15:49:33.097424 [Result(iter=0, loss=4.176258, time=311.87), Result(iter=20, loss=3.006781, time=8.8)]
+2024-04-27 15:50:54.396877 [Result(iter=0, loss=4.271519, time=78825.87), Result(iter=20, loss=2.77744, time=9.25)]
+
+2024-04-27 15:50:59.521760 [Result(iter=0, loss=4.236855, time=307.26), Result(iter=20, loss=3.037256, time=7.78)]
+2024-04-27 15:51:01.741531 [Result(iter=0, loss=4.210068, time=309.7), Result(iter=20, loss=3.100464, time=8.15)]
+2024-04-27 15:51:03.973436 [Result(iter=0, loss=4.176258, time=314.36), Result(iter=20, loss=3.006781, time=8.87)]
+2024-04-27 15:51:14.649446 [Result(iter=0, loss=4.271519, time=8403.2), Result(iter=20, loss=2.778322, time=9.18)]
+
+batch 256, block 64, layer 6, head 8, embd 256:
+2024-04-27 15:54:29.858296 [Result(iter=0, loss=4.274186, time=76395.15), Result(iter=20, loss=2.763832, time=16.77)]
+
+batch 128, block 128, layer 6, head 8, embd 256:
+2024-04-27 15:56:30.211657 [Result(iter=0, loss=4.242942, time=38114.07), Result(iter=20, loss=2.780438, time=18.24)]
+
+2024-04-27 16:38:28.764083 [Result(iter=0, loss=4.236855, time=294.33), Result(iter=20, loss=3.037256, time=7.77)]
+2024-04-27 16:38:30.949990 [Result(iter=0, loss=4.210068, time=296.6), Result(iter=20, loss=3.100464, time=8.0)]
+2024-04-27 16:38:33.192864 [Result(iter=0, loss=4.176258, time=308.66), Result(iter=20, loss=3.006781, time=8.71)]
+2024-04-27 16:38:49.163582 [Result(iter=0, loss=4.215122, time=13721.42), Result(iter=20, loss=2.93996, time=3.35)]
+
+2024-05-01 11:07:03.494056 [Result(iter=0, loss=4.236855, time=344.42), Result(iter=20, loss=3.037256, time=7.77)]
+2024-05-01 11:07:05.745764 [Result(iter=0, loss=4.210068, time=307.83), Result(iter=20, loss=3.100464, time=8.16)]
+2024-05-01 11:07:07.990791 [Result(iter=0, loss=4.176258, time=310.06), Result(iter=20, loss=3.006781, time=8.91)]
+2024-05-01 11:08:32.072173 [Result(iter=0, loss=4.215115, time=81815.94), Result(iter=20, loss=2.939932, time=3.36)]
+
+2024-05-01 11:08:38.967297 [Result(iter=0, loss=4.236855, time=295.37), Result(iter=20, loss=3.037256, time=7.76)]
+2024-05-01 11:08:41.189329 [Result(iter=0, loss=4.210068, time=300.61), Result(iter=20, loss=3.100464, time=8.12)]
+2024-05-01 11:08:43.452813 [Result(iter=0, loss=4.176258, time=311.36), Result(iter=20, loss=3.006781, time=8.86)]
+2024-05-01 11:08:51.193052 [Result(iter=0, loss=4.215115, time=5626.7), Result(iter=20, loss=2.939945, time=3.35)]
+
+2024-05-01 11:11:07.760938 [Result(iter=0, loss=4.236855, time=301.64), Result(iter=20, loss=3.037256, time=7.74)]
+2024-05-01 11:11:09.970674 [Result(iter=0, loss=4.210068, time=296.65), Result(iter=20, loss=3.100464, time=8.12)]
+2024-05-01 11:11:12.213820 [Result(iter=0, loss=4.176258, time=306.59), Result(iter=20, loss=3.006781, time=8.81)]
+2024-05-01 11:11:19.974339 [Result(iter=0, loss=4.215115, time=5641.4), Result(iter=20, loss=2.939981, time=3.38)]
+
+2024-05-01 11:14:05.370128 [Result(iter=0, loss=4.236855, time=305.37), Result(iter=20, loss=3.037256, time=7.8)]
+2024-05-01 11:14:07.630753 [Result(iter=0, loss=4.210068, time=307.82), Result(iter=20, loss=3.100464, time=8.14)]
+2024-05-01 11:14:09.916260 [Result(iter=0, loss=4.176258, time=311.91), Result(iter=20, loss=3.006781, time=8.87)]
+2024-05-01 11:14:17.789585 [Result(iter=0, loss=4.215115, time=5699.87), Result(iter=20, loss=2.939932, time=3.37)]
+
+2024-05-01 11:14:24.648996 [Result(iter=0, loss=4.236855, time=297.14), Result(iter=20, loss=3.037256, time=7.76)]
+2024-05-01 11:14:26.923761 [Result(iter=0, loss=4.210068, time=307.88), Result(iter=20, loss=3.100464, time=8.17)]
+2024-05-01 11:14:29.222893 [Result(iter=0, loss=4.176258, time=310.68), Result(iter=20, loss=3.006781, time=8.96)]
+2024-05-01 11:14:37.139113 [Result(iter=0, loss=4.215115, time=5747.42), Result(iter=20, loss=2.940002, time=3.39)]
