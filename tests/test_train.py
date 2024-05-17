@@ -13,6 +13,7 @@ class Result(BaseModel):
     iter: int
     loss: float
     time: float
+    max_alloc: float = 0.0
 
 
 @pytest.fixture()
@@ -20,6 +21,8 @@ def results(request: pytest.FixtureRequest) -> list[Result]:
     # Run python train.py tests/config/config_1.py and capture its output
 
     os.environ["TORCHINDUCTOR_FX_GRAPH_CACHE"] = "1"
+    # os.environ["PYTORCH_NO_CUDA_MEMORY_CACHING"] = "1"
+    print(os.environ)
     process = subprocess.run(
         args=f"nice -n -20 python3 train.py {request.param}",
         check=False,
@@ -44,7 +47,7 @@ def results(request: pytest.FixtureRequest) -> list[Result]:
     results: list[Result] = []
     for line in output.split("\n"):
         match = re.search(
-            r"iter (\d+): loss (\d+\.\d+), time (\d+\.\d+)ms, mfu (-?\d+\.\d+)%",
+            r"iter (\d+): loss (\d+\.\d+), time (\d+\.\d+)ms, mfu (-?\d+\.\d+)%, max alloc (\d+\.\d+)GB",
             line,
         )
         if match:
@@ -52,6 +55,7 @@ def results(request: pytest.FixtureRequest) -> list[Result]:
                 iter=int(match.group(1)),
                 loss=float(match.group(2)),
                 time=float(match.group(3)),
+                max_alloc=float(match.group(4)),
             )
             if r.iter >= 0:
                 results.append(r)

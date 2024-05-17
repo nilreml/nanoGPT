@@ -47,11 +47,11 @@ init_from = "scratch"  # 'scratch' or 'resume' or 'gpt2*'
 dataset = "openwebtext"
 gradient_accumulation_steps = 5 * 8  # used to simulate larger batch sizes
 batch_size = 12  # if gradient_accumulation_steps > 1, this is the micro-batch size
-block_size = 1024
+seq_len = 1024
 # model
-n_layer = 12
-n_head = 12
-n_embd = 768
+num_layers = 12
+num_heads = 12
+dim_model = 768
 dropout = 0.0  # for pretraining 0 is good, for finetuning try 0.1+
 bias = False  # do we use bias inside LayerNorm and Linear layers?
 # adamw optimizer
@@ -81,7 +81,7 @@ config = {k: globals()[k] for k in config_keys}  # will be useful for logging
 # -----------------------------------------------------------------------------
 
 # various inits, derived attributes, I/O setup
-tokens_per_iter = gradient_accumulation_steps * batch_size * block_size
+tokens_per_iter = gradient_accumulation_steps * batch_size * seq_len
 print(f"tokens per iteration will be: {tokens_per_iter:,}")
 
 os.makedirs(out_dir, exist_ok=True)
@@ -104,9 +104,9 @@ def get_batch(split):
         data = np.memmap(os.path.join(data_dir, "train.bin"), dtype=np.uint16, mode="r")
     else:
         data = np.memmap(os.path.join(data_dir, "val.bin"), dtype=np.uint16, mode="r")
-    ix = torch.randint(len(data) - block_size, (batch_size,))
-    x = torch.stack([torch.from_numpy((data[i : i + block_size]).astype(np.int64)) for i in ix])
-    y = torch.stack([torch.from_numpy((data[i + 1 : i + 1 + block_size]).astype(np.int64)) for i in ix])
+    ix = torch.randint(len(data) - seq_len, (batch_size,))
+    x = torch.stack([torch.from_numpy((data[i : i + seq_len]).astype(np.int64)) for i in ix])
+    y = torch.stack([torch.from_numpy((data[i + 1 : i + 1 + seq_len]).astype(np.int64)) for i in ix])
     if device_type == "cuda":
         # pin arrays x,y, which allows us to move them to GPU asynchronously (non_blocking=True)
         x, y = x.pin_memory().to(device, non_blocking=True), y.pin_memory().to(device, non_blocking=True)
@@ -130,11 +130,11 @@ if os.path.exists(meta_path):
 
 # model init
 model_args = {
-    "n_layer": n_layer,
-    "n_head": n_head,
-    "n_embd": n_embd,
-    "n_mlp": 3 * n_embd,
-    "block_size": block_size,
+    "num_layers": num_layers,
+    "num_heads": num_heads,
+    "dim_model": dim_model,
+    "n_mlp": 3 * dim_model,
+    "seq_len": seq_len,
     "bias": bias,
     "vocab_size": None,
     "dropout": dropout,
@@ -156,8 +156,8 @@ else:
     msg = f"Unsupported init_from value: {init_from}"
     raise Exception(msg)
 
-if block_size < model.config.block_size:
-    msg = "block_size cannot be smaller than the model's block size"
+if seq_len < model.config.seq_len:
+    msg = "seq_len cannot be smaller than the model's sequence length"
     raise Exception(msg)
 
 model.to(device)
@@ -295,6 +295,8 @@ while True:
     t1 = time.time()
     dts.append(t1 - t0)
     t0 = t1
+    max_mem_alloc = torch.cuda.max_memory_allocated() / (1024**3)
+    torch.cuda.reset_peak_memory_stats()
     if iter_num % log_interval == 0:
         # get loss as float. note: this is a CPU-GPU sync point
         # scale up to undo the division above, approximating the true total loss (exact would have been a sum)
@@ -304,7 +306,9 @@ while True:
         if local_iter_num >= 5:  # let the training loop settle a bit
             mfu = raw_model.estimate_mfu(batch_size * gradient_accumulation_steps, dt)
             running_mfu = mfu if running_mfu == -1.0 else 0.9 * running_mfu + 0.1 * mfu
-        print(f"iter {iter_num}: loss {lossf:.6f}, time {dt*1000:.2f}ms, mfu {running_mfu*100:.2f}%")
+        print(
+            f"iter {iter_num}: loss {lossf:.6f}, time {dt*1000:.2f}ms, mfu {running_mfu*100:.2f}%, max alloc {max_mem_alloc:.4f}GB",
+        )
     iter_num += 1
     local_iter_num += 1
 

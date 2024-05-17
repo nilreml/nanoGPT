@@ -362,3 +362,6 @@ $RECYCLE.BIN/
 *.pt
 *.pyc
 input.txt
+
+# misc
+experiments

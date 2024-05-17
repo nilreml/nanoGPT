@@ -1,3 +1,11 @@
 {
-    "python.analysis.typeCheckingMode": "standard"
+    "python.analysis.typeCheckingMode": "standard",
+    "insert-unicode.favorites": {
+        "directories": {},
+        "items": [
+            [
+                773
+            ]
+        ]
+    }
 }

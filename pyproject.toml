@@ -9,7 +9,7 @@ testpaths = ["tests"]
 # Extension for other IDEs : https://github.com/charliermarsh/ruff-lsp
 # NOTE: disable pycodestyle, pydocstyle, bandit and flake8 linters in your IDE since ruff includes these
 target-version = "py311"
-line-length = 120
+line-length = 130
 unsafe-fixes = true
 
 [tool.ruff.lint]

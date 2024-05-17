@@ -12,13 +12,13 @@ wandb_run_name = "mini-gpt"
 dataset = "shakespeare_char"
 gradient_accumulation_steps = 1
 batch_size = 64
-block_size = 64
+seq_len = 64
 
 bias = False
 
-n_layer = 4
-n_head = 4
-n_embd = 128
+num_layers = 4
+num_heads = 4
+dim_model = 128
 dropout = 0.1
 
 learning_rate = 2e-3
