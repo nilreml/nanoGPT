@@ -34,9 +34,9 @@ Batch = Literal[20]
 Head = Literal[6]
 Token = Literal[64]
 DimModel = Literal[192]
-DimHead = Literal[32]  # Dim/Head
-DimX3 = Literal[576]  # Dim*3
-DimMLP = Literal[480]  # Dim*2.5
+DimHead = Literal[32]  # DimModel/Head
+DimModelX3 = Literal[576]  # DimModel*3
+DimMLP = Literal[480]  # DimModel*2.5
 
 In = TypeVar("In")
 Out = TypeVar("Out")
@@ -68,7 +68,7 @@ if TYPE_CHECKING:
         def contiguous(self, memory_format=torch.contiguous_format) -> Self: ...
 
         def split(
-            self: "Tensor[*ShapeRest, DimX3]",
+            self: "Tensor[*ShapeRest, DimModelX3]",
             split_size: DimModel,
             dim: Literal[-1],
         ) -> tuple[
@@ -285,7 +285,7 @@ class GPTConfig(BaseModel):
 
     @computed_field
     @property
-    def dim_x3(self) -> DimX3:
+    def dim_model_x3(self) -> DimModelX3:
         return self.dim_model * 3
 
     @computed_field
@@ -315,13 +315,13 @@ class CausalSelfAttention(nn.Module):
     def __init__(self, config: GPTConfig) -> None:
         super().__init__()
         self.head: Head = config.num_heads
-        self.dim: DimModel = config.dim_model
+        self.dim_model: DimModel = config.dim_model
         self.dim_head: DimHead = config.dim_head
-        self.dim_x3: DimX3 = config.dim_x3
+        self.dim_model_x3: DimModelX3 = config.dim_model_x3
         self.dropout = config.dropout
 
         # query, key, value projections for all heads in a batch
-        self.qkv_proj: Linear[DimModel, DimX3] = Linear(self.dim, self.dim_x3, bias=config.bias)
+        self.qkv_proj: Linear[DimModel, DimModelX3] = Linear(self.dim_model, self.dim_model_x3, bias=config.bias)
 
         # output projection
         self.out_proj: Linear[DimModel, DimModel] = Linear(config.dim_model, config.dim_model, bias=config.bias)
