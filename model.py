@@ -408,8 +408,8 @@ class Block(nn.Module):
         # att_norm = self.ln_2(att_resid)
         # return att_norm + self.mlp(att_norm)
 
-        x = x + self.attn(self.ln_1(x))
-        return x + self.mlp(self.ln_2(x))
+        y = x + self.attn(self.ln_1(x))
+        return y + self.mlp(self.ln_2(y))
 
 
 class GPT(nn.Module):

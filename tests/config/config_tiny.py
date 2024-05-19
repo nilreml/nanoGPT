@@ -22,13 +22,13 @@ dim_model = 32
 dropout = 0.0
 
 learning_rate = 1e-3
-max_iters = 1000
+max_iters = 100
 lr_decay_iters = max_iters
 min_lr = learning_rate / 10
 beta2 = 0.95
 
 warmup_iters = 10
 
-compile = True
+compile = False
 
 seed_offset = 0

@@ -243,3 +243,130 @@ batch 128, block 128, layer 6, head 8, embd 256:
 2024-05-17 18:24:12.261479 [Result(iter=0, loss=4.210068, time=243.56, max_alloc=-100.0), Result(iter=20, loss=3.100464, time=7.0, max_alloc=4.27)]
 2024-05-17 18:24:14.161338 [Result(iter=0, loss=4.176258, time=241.75, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=7.56, max_alloc=3.99)]
 2024-05-17 18:24:20.691918 [Result(iter=0, loss=4.215107, time=4709.9, max_alloc=-100.0), Result(iter=20, loss=2.939859, time=3.02, max_alloc=9.9)]
+
+
+2024-05-18 12:33:52.436340 [Result(iter=0, loss=4.236855, time=229.76, max_alloc=-100.0), Result(iter=20, loss=3.037256, time=6.6, max_alloc=4.53)]
+2024-05-18 12:33:54.290165 [Result(iter=0, loss=4.210068, time=235.13, max_alloc=-100.0), Result(iter=20, loss=3.100464, time=6.99, max_alloc=4.28)]
+2024-05-18 12:33:56.192080 [Result(iter=0, loss=4.176258, time=239.63, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=7.57, max_alloc=3.98)]
+2024-05-18 12:34:02.753001 [Result(iter=0, loss=4.215107, time=4742.87, max_alloc=-100.0), Result(iter=20, loss=2.939944, time=3.03, max_alloc=9.87)]
+
+2024-05-18 12:34:36.689689 [Result(iter=0, loss=4.236855, time=232.94, max_alloc=-100.0), Result(iter=20, loss=3.037256, time=6.6, max_alloc=4.53)]
+2024-05-18 12:34:38.548752 [Result(iter=0, loss=4.210068, time=233.39, max_alloc=-100.0), Result(iter=20, loss=3.100464, time=6.81, max_alloc=4.4)]
+2024-05-18 12:34:40.462877 [Result(iter=0, loss=4.176258, time=240.36, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=7.53, max_alloc=4.0)]
+2024-05-18 12:34:46.929420 [Result(iter=0, loss=4.215107, time=4642.88, max_alloc=-100.0), Result(iter=20, loss=2.939921, time=3.01, max_alloc=9.95)]
+
+2024-05-18 22:22:44.822914 [Result(iter=0, loss=4.236855, time=240.27, max_alloc=-100.0), Result(iter=20, loss=3.037256, time=6.63, max_alloc=4.51)]
+2024-05-18 22:22:46.722879 [Result(iter=0, loss=4.210068, time=240.44, max_alloc=-100.0), Result(iter=20, loss=3.100464, time=6.95, max_alloc=4.3)]
+2024-05-18 22:22:48.601416 [Result(iter=0, loss=4.176258, time=248.96, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=7.53, max_alloc=4.0)]
+
+w/o NUMA, 2CCD:
+2024-05-18 22:23:57.972894 [Result(iter=0, loss=4.236855, time=244.02, max_alloc=-100.0), Result(iter=20, loss=3.037256, time=6.49, max_alloc=4.61)]
+2024-05-18 22:23:59.846831 [Result(iter=0, loss=4.210068, time=239.5 , max_alloc=-100.0), Result(iter=20, loss=3.100464, time=6.95, max_alloc=4.3)]
+2024-05-18 22:24:01.726733 [Result(iter=0, loss=4.176258, time=244.98, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=7.42, max_alloc=4.06)]
+
+2024-05-18 22:24:05.541074 [Result(iter=0, loss=4.236855, time=237.66, max_alloc=-100.0), Result(iter=20, loss=3.037256, time=6.48, max_alloc=4.62)]
+2024-05-18 22:24:07.412912 [Result(iter=0, loss=4.210068, time=243.41, max_alloc=-100.0), Result(iter=20, loss=3.100464, time=6.94, max_alloc=4.31)]
+2024-05-18 22:24:09.322088 [Result(iter=0, loss=4.176258, time=246.25, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=7.44, max_alloc=4.05)]
+
+2024-05-18 22:24:12.158552 [Result(iter=0, loss=4.236855, time=237.27, max_alloc=-100.0), Result(iter=20, loss=3.037256, time=6.48, max_alloc=4.62)]
+2024-05-18 22:24:14.020287 [Result(iter=0, loss=4.210068, time=241.27, max_alloc=-100.0), Result(iter=20, loss=3.100464, time=6.99, max_alloc=4.28)]
+2024-05-18 22:24:15.908970 [Result(iter=0, loss=4.176258, time=247.28, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=7.42, max_alloc=4.06)]
+
+2024-05-18 22:24:18.619397 [Result(iter=0, loss=4.236855, time=237.87, max_alloc=-100.0), Result(iter=20, loss=3.037256, time=6.54, max_alloc=4.57)]
+2024-05-18 22:24:20.474970 [Result(iter=0, loss=4.210068, time=243.34, max_alloc=-100.0), Result(iter=20, loss=3.100464, time=6.89, max_alloc=4.34)]
+2024-05-18 22:24:22.343967 [Result(iter=0, loss=4.176258, time=247.25, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=7.45, max_alloc=4.04)]
+
+/w SRAT, 2CCD:
+
+2024-05-18 22:40:24.159306 [Result(iter=0, loss=4.236855, time=273.31, max_alloc=-100.0), Result(iter=20, loss=3.037256, time=6.55, max_alloc=4.57)]
+2024-05-18 22:40:25.985048 [Result(iter=0, loss=4.210068, time=236.46, max_alloc=-100.0), Result(iter=20, loss=3.100464, time=6.99, max_alloc=4.28)]
+2024-05-18 22:40:27.833423 [Result(iter=0, loss=4.176258, time=236.31, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=7.44, max_alloc=4.05)]
+
+2024-05-18 22:40:30.959252 [Result(iter=0, loss=4.236855, time=220.82, max_alloc=-100.0), Result(iter=20, loss=3.037256, time=6.4, max_alloc=4.68)]
+2024-05-18 22:40:32.797002 [Result(iter=0, loss=4.210068, time=232.32, max_alloc=-100.0), Result(iter=20, loss=3.100464, time=6.95, max_alloc=4.3)]
+2024-05-18 22:40:34.648818 [Result(iter=0, loss=4.176258, time=236.05, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=7.54, max_alloc=4.0)]
+
+2024-05-18 22:40:38.427575 [Result(iter=0, loss=4.236855, time=223.27, max_alloc=-100.0), Result(iter=20, loss=3.037256, time=6.48, max_alloc=4.62)]
+2024-05-18 22:40:40.278744 [Result(iter=0, loss=4.210068, time=237.37, max_alloc=-100.0), Result(iter=20, loss=3.100464, time=6.97, max_alloc=4.29)]
+2024-05-18 22:40:42.155815 [Result(iter=0, loss=4.176258, time=236.34, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=7.57, max_alloc=3.98)]
+
+2024-05-18 22:40:46.785205 [Result(iter=0, loss=4.236855, time=227.26, max_alloc=-100.0), Result(iter=20, loss=3.037256, time=6.48, max_alloc=4.62)]
+2024-05-18 22:40:48.641969 [Result(iter=0, loss=4.210068, time=243.58, max_alloc=-100.0), Result(iter=20, loss=3.100464, time=6.98, max_alloc=4.28)]
+2024-05-18 22:40:50.492396 [Result(iter=0, loss=4.176258, time=237.73, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=7.52, max_alloc=4.0)]
+
+
+2024-05-18 22:57:31.086003 [Result(iter=0, loss=4.236855, time=228.85, max_alloc=-100.0), Result(iter=20, loss=3.037256, time=6.54, max_alloc=4.57)]
+2024-05-18 22:57:32.928633 [Result(iter=0, loss=4.210068, time=233.3, max_alloc=-100.0), Result(iter=20, loss=3.100464, time=6.99, max_alloc=4.28)]
+2024-05-18 22:57:34.766355 [Result(iter=0, loss=4.176258, time=234.73, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=7.52, max_alloc=4.01)]
+2024-05-18 22:58:48.990543 [Result(iter=0, loss=4.215107, time=72302.6, max_alloc=-100.0), Result(iter=20, loss=2.939876, time=3.02, max_alloc=9.9)]
+
+2024-05-18 23:04:32.919703 [Result(iter=0, loss=4.236855, time=232.03, max_alloc=-100.0), Result(iter=20, loss=3.037256, time=6.62, max_alloc=4.52)]
+2024-05-18 23:04:34.769457 [Result(iter=0, loss=4.210068, time=235.4, max_alloc=-100.0), Result(iter=20, loss=3.100464, time=6.97, max_alloc=4.29)]
+2024-05-18 23:04:36.580962 [Result(iter=0, loss=4.176258, time=232.41, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=7.4, max_alloc=4.07)]
+2024-05-18 23:04:43.005923 [Result(iter=0, loss=4.215107, time=4643.74, max_alloc=-100.0), Result(iter=20, loss=2.939891, time=3.1, max_alloc=9.66)]
+
+cudaMallocAsync:
+2024-05-18 23:17:04.165332 [Result(iter=0, loss=4.236855, time=239.71, max_alloc=-100.0), Result(iter=20, loss=3.037256, time=6.83, max_alloc=4.38)]
+2024-05-18 23:17:06.041006 [Result(iter=0, loss=4.210068, time=239.06, max_alloc=-100.0), Result(iter=20, loss=3.100464, time=7.43, max_alloc=4.03)]
+2024-05-18 23:17:07.932117 [Result(iter=0, loss=4.176258, time=247.18, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=8.29, max_alloc=3.64)]
+
+2024-05-18 23:18:22.734663 [Result(iter=0, loss=4.236855, time=239.5, max_alloc=-100.0), Result(iter=20, loss=3.037256, time=7.15, max_alloc=4.18)]
+2024-05-18 23:18:24.591147 [Result(iter=0, loss=4.210068, time=237.97, max_alloc=-100.0), Result(iter=20, loss=3.100464, time=7.42, max_alloc=4.03)]
+2024-05-18 23:18:26.465420 [Result(iter=0, loss=4.176258, time=242.85, max_alloc=-100.0), Result(iter=20, loss=3.006781, time=8.29, max_alloc=3.63)]
+
+no initial eval:
+2024-05-18 23:23:02.971470 [Result(iter=0, loss=4.236855, time=119.47, max_alloc=-100.0), Result(iter=20, loss=3.073412, time=7.23, max_alloc=4.14)]
+2024-05-18 23:23:04.725622 [Result(iter=0, loss=4.210068, time=124.42, max_alloc=-100.0), Result(iter=20, loss=3.098463, time=7.59, max_alloc=3.94)]
+2024-05-18 23:23:06.475752 [Result(iter=0, loss=4.176258, time=122.74, max_alloc=-100.0), Result(iter=20, loss=3.101593, time=8.25, max_alloc=3.65)]
+
+2024-05-19 01:05:03.346739 [Result(iter=0, loss=4.236855, time=161.37, mfu=-100.0, max_alloc=0.1124), Result(iter=20, loss=3.073412, time=7.3, mfu=4.1, max_alloc=0.1203)]
+2024-05-19 01:05:05.165592 [Result(iter=0, loss=4.210068, time=134.0, mfu=-100.0, max_alloc=0.1206), Result(iter=20, loss=3.098463, time=7.98, mfu=3.75, max_alloc=0.1286)]
+2024-05-19 01:05:06.976393 [Result(iter=0, loss=4.176258, time=134.23, mfu=-100.0, max_alloc=0.1262), Result(iter=20, loss=3.101593, time=8.62, mfu=3.5, max_alloc=0.1312)]
+
+2024-05-19 09:15:10.168900 [Result(iter=0, loss=4.236855, time=237.55, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=6.39, mfu=4.68, max_alloc=0.1279)]
+2024-05-19 09:15:12.033823 [Result(iter=0, loss=4.210068, time=236.86, mfu=-100.0, max_alloc=0.1264), Result(iter=20, loss=3.100464, time=6.84, mfu=4.37, max_alloc=0.1362)]
+2024-05-19 09:15:13.906770 [Result(iter=0, loss=4.176258, time=239.53, mfu=-100.0, max_alloc=0.1301), Result(iter=20, loss=3.006781, time=7.55, mfu=3.99, max_alloc=0.1351)]
+
+2024-05-19 11:09:08.476668 [Result(iter=0, loss=4.236855, time=245.15, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=6.56, mfu=4.56, max_alloc=0.1279)]
+2024-05-19 11:09:10.325082 [Result(iter=0, loss=4.210068, time=229.35, mfu=-100.0, max_alloc=0.1264), Result(iter=20, loss=3.100464, time=7.72, mfu=3.87, max_alloc=0.1362)]
+2024-05-19 11:09:12.171792 [Result(iter=0, loss=4.176258, time=234.24, mfu=-100.0, max_alloc=0.1301), Result(iter=20, loss=3.006781, time=7.39, mfu=4.07, max_alloc=0.1351)]
+
+2024-05-19 11:10:36.759726 [Result(iter=0, loss=4.236855, time=231.43, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=6.61, mfu=4.53, max_alloc=0.1279)]
+2024-05-19 11:10:38.632104 [Result(iter=0, loss=4.210068, time=233.83, mfu=-100.0, max_alloc=0.1264), Result(iter=20, loss=3.100464, time=6.94, mfu=4.31, max_alloc=0.1362)]
+2024-05-19 11:10:40.507556 [Result(iter=0, loss=4.176258, time=237.12, mfu=-100.0, max_alloc=0.1301), Result(iter=20, loss=3.006781, time=7.45, mfu=4.05, max_alloc=0.1351)]
+2024-05-19 11:11:08.122237 [Result(iter=0, loss=4.21513, time=25677.2, mfu=-100.0, max_alloc=0.357), Result(iter=20, loss=2.94006, time=3.29, mfu=9.08, max_alloc=0.0082)]
+
+2024-05-19 11:11:14.466392 [Result(iter=0, loss=4.236855, time=238.1, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=7.18, mfu=4.17, max_alloc=0.1279)]
+2024-05-19 11:11:16.336199 [Result(iter=0, loss=4.210068, time=238.82, mfu=-100.0, max_alloc=0.1264), Result(iter=20, loss=3.100464, time=6.9, mfu=4.34, max_alloc=0.1362)]
+2024-05-19 11:11:18.216384 [Result(iter=0, loss=4.176258, time=239.42, mfu=-100.0, max_alloc=0.1301), Result(iter=20, loss=3.006781, time=7.47, mfu=4.03, max_alloc=0.1351)]
+2024-05-19 11:11:24.512146 [Result(iter=0, loss=4.21513, time=4518.85, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.940035, time=3.23, mfu=9.27, max_alloc=0.0082)]
+
+2024-05-19 11:14:51.908734 [Result(iter=0, loss=4.236855, time=233.57, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=6.18, mfu=4.84, max_alloc=0.1279)]
+2024-05-19 11:14:53.756145 [Result(iter=0, loss=4.210068, time=234.35, mfu=-100.0, max_alloc=0.1264), Result(iter=20, loss=3.100464, time=6.85, mfu=4.36, max_alloc=0.1362)]
+2024-05-19 11:14:55.658653 [Result(iter=0, loss=4.176258, time=239.69, mfu=-100.0, max_alloc=0.1301), Result(iter=20, loss=3.006781, time=7.69, mfu=3.92, max_alloc=0.1351)]
+2024-05-19 11:15:01.979904 [Result(iter=0, loss=4.21513, time=4504.08, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.93993, time=3.15, mfu=9.49, max_alloc=0.0082)]
+
+2024-05-19 11:23:20.760531 [Result(iter=0, loss=4.236855, time=233.95, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=6.6, mfu=4.53, max_alloc=0.1279)]
+2024-05-19 11:23:22.597823 [Result(iter=0, loss=4.210068, time=229.69, mfu=-100.0, max_alloc=0.1264), Result(iter=20, loss=3.100464, time=6.9, mfu=4.33, max_alloc=0.1362)]
+2024-05-19 11:23:24.469922 [Result(iter=0, loss=4.176258, time=240.63, mfu=-100.0, max_alloc=0.1301), Result(iter=20, loss=3.006781, time=7.4, mfu=4.07, max_alloc=0.1351)]
+2024-05-19 11:23:30.836224 [Result(iter=0, loss=4.21513, time=4578.4, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.940107, time=3.24, mfu=9.25, max_alloc=0.0082)]
+
+2024-05-19 11:24:22.052606 [Result(iter=0, loss=4.236855, time=231.11, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=6.62, mfu=4.52, max_alloc=0.1279)]
+2024-05-19 11:24:23.890669 [Result(iter=0, loss=4.210068, time=231.21, mfu=-100.0, max_alloc=0.1264), Result(iter=20, loss=3.100464, time=6.95, mfu=4.31, max_alloc=0.1362)]
+2024-05-19 11:24:25.768199 [Result(iter=0, loss=4.176258, time=237.6, mfu=-100.0, max_alloc=0.1301), Result(iter=20, loss=3.006781, time=7.53, mfu=4.0, max_alloc=0.1351)]
+2024-05-19 11:24:32.048246 [Result(iter=0, loss=4.21513, time=4499.3, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.939989, time=3.14, mfu=9.52, max_alloc=0.0082)]
+
+2024-05-19 11:29:23.004051 [Result(iter=0, loss=4.236855, time=232.76, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=6.6, mfu=4.53, max_alloc=0.1279)]
+2024-05-19 11:29:24.782810 [Result(iter=0, loss=4.210068, time=232.67, mfu=-100.0, max_alloc=0.1264), Result(iter=20, loss=3.100464, time=6.93, mfu=4.32, max_alloc=0.1362)]
+2024-05-19 11:29:26.598070 [Result(iter=0, loss=4.176258, time=240.84, mfu=-100.0, max_alloc=0.1301), Result(iter=20, loss=3.006781, time=7.5, mfu=4.02, max_alloc=0.1351)]
+2024-05-19 11:29:36.876844 [Result(iter=0, loss=4.21513, time=8428.02, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.93998, time=3.14, mfu=9.53, max_alloc=0.0082)]
+
+2024-05-19 11:29:53.090566 [Result(iter=0, loss=4.236855, time=228.2, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=6.48, mfu=4.61, max_alloc=0.1279)]
+2024-05-19 11:29:54.879599 [Result(iter=0, loss=4.210068, time=233.82, mfu=-100.0, max_alloc=0.1264), Result(iter=20, loss=3.100464, time=6.87, mfu=4.36, max_alloc=0.1362)]
+2024-05-19 11:29:56.703842 [Result(iter=0, loss=4.176258, time=240.43, mfu=-100.0, max_alloc=0.1301), Result(iter=20, loss=3.006781, time=7.46, mfu=4.04, max_alloc=0.1351)]
+2024-05-19 11:30:02.962038 [Result(iter=0, loss=4.21513, time=4516.39, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.939934, time=3.15, mfu=9.49, max_alloc=0.0082)]
+
+2024-05-19 11:30:09.390446 [Result(iter=0, loss=4.236855, time=235.06, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=6.55, mfu=4.56, max_alloc=0.1279)]
+2024-05-19 11:30:11.206012 [Result(iter=0, loss=4.210068, time=238.04, mfu=-100.0, max_alloc=0.1264), Result(iter=20, loss=3.100464, time=7.03, mfu=4.26, max_alloc=0.1362)]
+2024-05-19 11:30:13.006558 [Result(iter=0, loss=4.176258, time=240.1, mfu=-100.0, max_alloc=0.1301), Result(iter=20, loss=3.006781, time=7.55, mfu=3.99, max_alloc=0.1351)]
+2024-05-19 11:30:19.275659 [Result(iter=0, loss=4.21513, time=4527.21, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.939996, time=3.13, mfu=9.57, max_alloc=0.0082)]

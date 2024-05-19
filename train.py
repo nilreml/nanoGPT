@@ -13,11 +13,10 @@ $ torchrun --nproc_per_node=8 --nnodes=2 --node_rank=1 --master_addr=123.456.123
 (If your cluster does not have Infiniband interconnect prepend NCCL_IB_DISABLE=1)
 """
 
-# Put these 4 lines at the top of the main script, before any imports
-# FIXME: remove once https://github.com/pytorch/pytorch/issues/109489 is resolved
-from torch._inductor import utils
-
-utils._use_template_for_cuda = lambda x, y: True
+# # Put these 4 lines at the top of the main script, before any imports
+# TODO: remove once https://github.com/pytorch/pytorch/issues/109489 is resolved
+# from torch._inductor import utils
+# utils._use_template_for_cuda = lambda x, y: True
 
 import math
 import os
@@ -25,7 +24,6 @@ import pickle
 import time
 from contextlib import nullcontext
 from datetime import datetime
-from pickle import HIGHEST_PROTOCOL
 
 import dill
 import numpy as np
@@ -76,7 +74,7 @@ compile = True
 seed_offset = 0
 # -----------------------------------------------------------------------------
 config_keys = [k for k, v in globals().items() if not k.startswith("_") and isinstance(v, int | float | bool | str)]
-exec(open("configurator.py").read())  # overrides from command line or config file
+exec(open("configurator.py").read())  # overrides from command line or config file  # noqa: SIM115, PTH123, S102
 config = {k: globals()[k] for k in config_keys}  # will be useful for logging
 # -----------------------------------------------------------------------------
 
@@ -84,28 +82,31 @@ config = {k: globals()[k] for k in config_keys}  # will be useful for logging
 tokens_per_iter = gradient_accumulation_steps * batch_size * seq_len
 print(f"tokens per iteration will be: {tokens_per_iter:,}")
 
-os.makedirs(out_dir, exist_ok=True)
+os.makedirs(out_dir, exist_ok=True)  # noqa: PTH103
 torch.manual_seed(seed_offset)
 torch.backends.cuda.matmul.allow_tf32 = True  # allow tf32 on matmul
 torch.backends.cudnn.allow_tf32 = True  # allow tf32 on cudnn
+torch.backends.cuda.matmul.allow_bf16_reduced_precision_reduction = True
 device_type = "cuda" if "cuda" in device else "cpu"  # for later use in torch.autocast
 # note: float16 data type will automatically use a GradScaler
 ptdtype = {"float32": torch.float32, "bfloat16": torch.bfloat16, "float16": torch.float16}[dtype]
-ctx = nullcontext() if device_type == "cpu" else torch.amp.autocast(device_type=device_type, dtype=ptdtype)
+ctx = nullcontext() if device_type == "cpu" else torch.autocast(device_type=device_type, dtype=ptdtype)
 
 # poor man's data loader
-data_dir = os.path.join("data", dataset)
+data_dir = os.path.join("data", dataset)  # noqa: PTH118
+
+print(torch.backends.cuda.matmul.__dict__)
 
 
 def get_batch(split):
     # We recreate np.memmap every batch to avoid a memory leak, as per
     # https://stackoverflow.com/questions/45132940/numpy-memmap-memory-usage-want-to-iterate-once/61472122#61472122
     if split == "train":
-        data = np.memmap(os.path.join(data_dir, "train.bin"), dtype=np.uint16, mode="r")
+        data = np.memmap(os.path.join(data_dir, "train.bin"), dtype=np.uint16, mode="r")  # noqa: PTH118
     else:
-        data = np.memmap(os.path.join(data_dir, "val.bin"), dtype=np.uint16, mode="r")
-    ix = torch.randint(len(data) - seq_len, (batch_size,))
-    x = torch.stack([torch.from_numpy((data[i : i + seq_len]).astype(np.int64)) for i in ix])
+        data = np.memmap(os.path.join(data_dir, "val.bin"), dtype=np.uint16, mode="r")  # noqa: PTH118
+    ix = torch.randint(len(data) - seq_len, (batch_size,))  # type: ignore  # noqa: PGH003
+    x = torch.stack([torch.from_numpy((data[i : i + seq_len]).astype(np.int64)) for i in ix])  # type: ignore  # noqa: PGH003
     y = torch.stack([torch.from_numpy((data[i + 1 : i + 1 + seq_len]).astype(np.int64)) for i in ix])
     if device_type == "cuda":
         # pin arrays x,y, which allows us to move them to GPU asynchronously (non_blocking=True)
@@ -120,11 +121,11 @@ iter_num = 0
 best_val_loss = 1e9
 
 # attempt to derive vocab_size from the dataset
-meta_path = os.path.join(data_dir, "meta.pkl")
+meta_path = os.path.join(data_dir, "meta.pkl")  # noqa: PTH118
 meta_vocab_size = None
-if os.path.exists(meta_path):
-    with open(meta_path, "rb") as f:
-        meta = pickle.load(f)
+if os.path.exists(meta_path):  # noqa: PTH110
+    with open(meta_path, "rb") as f:  # noqa: PTH123
+        meta = pickle.load(f)  # noqa: S301
     meta_vocab_size = meta["vocab_size"]
     print(f"found vocab_size = {meta_vocab_size} (inside {meta_path})")
 
@@ -151,7 +152,7 @@ if init_from == "scratch":
         print("defaulting to vocab_size of GPT-2 to 50304 (50257 rounded up for efficiency)")
     model_args["vocab_size"] = meta_vocab_size if meta_vocab_size is not None else 50304
     gptconf = GPTConfig(**model_args)
-    model = GPT(gptconf)
+    model: GPT = GPT(gptconf)
 else:
     msg = f"Unsupported init_from value: {init_from}"
     raise Exception(msg)
@@ -179,13 +180,13 @@ checkpoint = None  # free up memory
 if compile:
     print("compiling the model... (takes a ~minute)")
     unoptimized_model = model
-    model = torch.compile(
+    model: GPT = torch.compile(
         model,
         fullgraph=True,
         dynamic=False,
-        # mode="reduce-overhead",
-        mode="max-autotune",
-    )
+        mode="reduce-overhead",
+        # mode="max-autotune",
+    )  # type: ignore  # noqa: PGH003
 
 
 # helps estimate an arbitrarily accurate loss over either split using many batches
@@ -196,7 +197,7 @@ def estimate_loss():
     for split in ["train", "val"]:
         losses = torch.zeros(eval_iters)
         for k in range(eval_iters):
-            X, Y = get_batch(split)
+            X, Y = get_batch(split)  # noqa: N806
             with ctx:
                 logits, loss = model(X, Y)
             losses[k] = loss.item()
@@ -258,12 +259,12 @@ while True:
                     "best_val_loss": best_val_loss,
                     "config": config,
                 }
-                print(f"{datetime.now()} torch.save checkpoint to {out_dir}")
+                print(f"{datetime.now()} torch.save checkpoint to {out_dir}")  # noqa: DTZ005
                 torch.save(
                     checkpoint,
-                    os.path.join(out_dir, "ckpt.pt"),
+                    os.path.join(out_dir, "ckpt.pt"),  # noqa: PTH118
                     pickle_module=dill,
-                    pickle_protocol=HIGHEST_PROTOCOL,
+                    pickle_protocol=pickle.HIGHEST_PROTOCOL,
                 )
 
     if iter_num == 0 and eval_only:
@@ -271,7 +272,7 @@ while True:
 
     # forward backward update, with optional gradient accumulation to simulate larger batch size
     # and using the GradScaler if data type is float16
-    for micro_step in range(gradient_accumulation_steps):
+    for micro_step in range(gradient_accumulation_steps):  # noqa: B007
         with ctx:
             logits, loss = model(X, Y)
             loss = loss / gradient_accumulation_steps  # scale the loss to account for gradient accumulation
@@ -300,10 +301,10 @@ while True:
     if iter_num % log_interval == 0:
         # get loss as float. note: this is a CPU-GPU sync point
         # scale up to undo the division above, approximating the true total loss (exact would have been a sum)
-        lossf = loss.item() * gradient_accumulation_steps
+        lossf = loss.item() * gradient_accumulation_steps  # type: ignore  # noqa: PGH003
         dt = filter_dt(dts)
         dts = []
-        if local_iter_num >= 5:  # let the training loop settle a bit
+        if local_iter_num >= 5:  # let the training loop settle a bit  # noqa: PLR2004
             mfu = raw_model.estimate_mfu(batch_size * gradient_accumulation_steps, dt)
             running_mfu = mfu if running_mfu == -1.0 else 0.9 * running_mfu + 0.1 * mfu
         print(
