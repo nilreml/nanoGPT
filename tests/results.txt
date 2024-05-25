@@ -383,3 +383,33 @@ after pydantic config, real 2.163s:
 2024-05-25 09:59:35.315964 [Result(iter=0, loss=4.210068, time=293.1, mfu=-100.0, max_alloc=0.1264), Result(iter=20, loss=3.100464, time=7.83, mfu=3.82, max_alloc=0.1362)]
 2024-05-25 09:59:37.479219 [Result(iter=0, loss=4.176258, time=298.37, mfu=-100.0, max_alloc=0.1301), Result(iter=20, loss=3.006781, time=8.45, mfu=3.57, max_alloc=0.1351)]
 2024-05-25 09:59:44.980956 [Result(iter=0, loss=4.215122, time=5432.0, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.939907, time=3.56, mfu=8.41, max_alloc=0.0082)]
+
+2024-05-25 11:57:40.953487 [Result(iter=0, loss=4.236855, time=288.75, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=7.39, mfu=4.05, max_alloc=0.1279)]
+2024-05-25 11:57:41.275106 [Result(iter=0, loss=4.210068, time=148.5, mfu=-100.0, max_alloc=0.1307), Result(iter=20, loss=3.100464, time=7.77, mfu=3.85, max_alloc=0.1362)]
+2024-05-25 11:57:41.615669 [Result(iter=0, loss=4.176258, time=152.24, mfu=-100.0, max_alloc=0.1319), Result(iter=20, loss=3.006781, time=8.49, mfu=3.55, max_alloc=0.1351)]
+2024-05-25 11:57:47.064357 [Result(iter=0, loss=4.215122, time=5168.26, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.939926, time=3.56, mfu=8.41, max_alloc=0.0082)]
+
+2024-05-25 12:10:06.404988 [Result(iter=0, loss=4.236855, time=285.49, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=7.42, mfu=4.03, max_alloc=0.1279)]
+2024-05-25 12:10:06.726553 [Result(iter=0, loss=4.210068, time=148.65, mfu=-100.0, max_alloc=0.1307), Result(iter=20, loss=3.100464, time=7.78, mfu=3.84, max_alloc=0.1362)]
+2024-05-25 12:10:07.065188 [Result(iter=0, loss=4.176258, time=151.88, mfu=-100.0, max_alloc=0.1319), Result(iter=20, loss=3.006781, time=8.5, mfu=3.54, max_alloc=0.1351)]
+2024-05-25 12:10:12.510739 [Result(iter=0, loss=4.215122, time=5156.82, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.939929, time=3.55, mfu=8.42, max_alloc=0.0082)]
+
+2024-05-25 12:10:27.481460 [Result(iter=0, loss=4.236855, time=284.04, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=7.34, mfu=4.07, max_alloc=0.1279)]
+2024-05-25 12:10:27.803828 [Result(iter=0, loss=4.210068, time=149.5, mfu=-100.0, max_alloc=0.1307), Result(iter=20, loss=3.100464, time=7.76, mfu=3.86, max_alloc=0.1362)]
+2024-05-25 12:10:28.170881 [Result(iter=0, loss=4.176258, time=151.28, mfu=-100.0, max_alloc=0.1319), Result(iter=20, loss=3.006781, time=8.49, mfu=3.55, max_alloc=0.1351)]
+2024-05-25 12:10:33.694011 [Result(iter=0, loss=4.215122, time=5230.29, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.939975, time=3.56, mfu=8.39, max_alloc=0.0082)]
+
+2024-05-25 12:10:54.227042 [Result(iter=0, loss=4.236855, time=285.81, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=7.34, mfu=4.08, max_alloc=0.1279)]
+2024-05-25 12:10:54.544668 [Result(iter=0, loss=4.210068, time=145.97, mfu=-100.0, max_alloc=0.1307), Result(iter=20, loss=3.100464, time=7.7, mfu=3.88, max_alloc=0.1362)]
+2024-05-25 12:10:54.878960 [Result(iter=0, loss=4.176258, time=148.89, mfu=-100.0, max_alloc=0.1319), Result(iter=20, loss=3.006781, time=8.41, mfu=3.58, max_alloc=0.1351)]
+2024-05-25 12:11:00.313712 [Result(iter=0, loss=4.215122, time=5159.34, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.940002, time=3.54, mfu=8.45, max_alloc=0.0082)]
+
+2024-05-25 12:12:32.106478 [Result(iter=0, loss=4.236855, time=283.49, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=7.41, mfu=4.04, max_alloc=0.1279)]
+2024-05-25 12:12:32.426331 [Result(iter=0, loss=4.210068, time=147.78, mfu=-100.0, max_alloc=0.1307), Result(iter=20, loss=3.100464, time=7.74, mfu=3.86, max_alloc=0.1362)]
+2024-05-25 12:12:32.764591 [Result(iter=0, loss=4.176258, time=151.29, mfu=-100.0, max_alloc=0.1319), Result(iter=20, loss=3.006781, time=8.47, mfu=3.56, max_alloc=0.1351)]
+2024-05-25 12:12:38.367917 [Result(iter=0, loss=4.215122, time=5317.28, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.939934, time=3.57, mfu=8.38, max_alloc=0.0082)]
+
+2024-05-25 12:13:44.732854 [Result(iter=0, loss=4.236855, time=289.22, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=7.35, mfu=4.07, max_alloc=0.1279)]
+2024-05-25 12:13:45.061613 [Result(iter=0, loss=4.210068, time=147.92, mfu=-100.0, max_alloc=0.1307), Result(iter=20, loss=3.100464, time=7.72, mfu=3.87, max_alloc=0.1362)]
+2024-05-25 12:13:45.406713 [Result(iter=0, loss=4.176258, time=151.38, mfu=-100.0, max_alloc=0.1319), Result(iter=20, loss=3.006781, time=8.45, mfu=3.57, max_alloc=0.1351)]
+2024-05-25 12:13:51.103412 [Result(iter=0, loss=4.215122, time=5402.71, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.939892, time=3.56, mfu=8.4, max_alloc=0.0082)]

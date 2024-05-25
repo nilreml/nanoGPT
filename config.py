@@ -47,6 +47,14 @@ class Model(pydantic.BaseModel):
         # use_enum_values=True,
     )
 
+    def round_trip(self) -> Self:
+        """Round-trip the model through serialization and deserialization."""
+        return self.model_validate(self.model_dump())
+
+    def round_trip_json(self) -> Self:
+        """Round-trip the model through JSON serialization and deserialization."""
+        return self.model_validate_json(self.model_dump_json())
+
     @classmethod
     def model_validate_yaml(
         cls,
@@ -107,6 +115,8 @@ DimMLP = Literal[480]  # DimModel*2.5
 
 
 class GPTConfig(Model):
+    """Pydantic model containing GPT LLM configuration."""
+
     # TODO: handle padding vocab_size to neaerest multiple of 64 somewhere
 
     # Literal types for static type-checking
@@ -194,6 +204,8 @@ class OptimizationConfig(Model):
 
 
 class TrainConfig(Model):
+    """Pydantic model containing training configuration."""
+
     dataset: str
     batch_size: PositiveInt
     dtype: DType
@@ -212,6 +224,8 @@ class TrainConfig(Model):
 
 
 class RootConfig(Model):
+    """Pydantic model containing gpt model and training configuration."""
+
     model: GPTConfig
     train: TrainConfig
 
