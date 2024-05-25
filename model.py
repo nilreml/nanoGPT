@@ -22,21 +22,21 @@ from typing import (
 )
 
 import torch
-from pydantic import BaseModel, computed_field
 from torch import nn  # Tensor
+
+from config import (
+    Batch,
+    DimHead,
+    DimMLP,
+    DimModel,
+    DimModelX3,
+    GPTConfig,
+    Head,
+    Token,
+)
 
 ellipsis = EllipsisType
 
-# Place-holder values for static type-checking
-# NOTE: values should be unique
-# TODO: use type arithmetic once implemented by PyRight
-Batch = Literal[20]
-Head = Literal[6]
-Token = Literal[64]
-DimModel = Literal[192]
-DimHead = Literal[32]  # DimModel/Head
-DimModelX3 = Literal[576]  # DimModel*3
-DimMLP = Literal[480]  # DimModel*2.5
 
 In = TypeVar("In")
 Out = TypeVar("Out")
@@ -212,8 +212,7 @@ if TYPE_CHECKING:
         weight: Tensor
 
         def __new__(cls, in_features: In, out_features: Out, bias: bool = True, device=None, dtype=None) -> "Linear[In, Out]": ...  # noqa: PLR0913, FBT001, FBT002
-        def __init__(self, in_features: In, out_features: Out, bias: bool = True, device=None, dtype=None) -> None:  # noqa: PLR0913, FBT001, FBT002
-            ...
+        def __init__(self, in_features: In, out_features: Out, bias: bool = True, device=None, dtype=None) -> None: ...  # noqa: PLR0913, FBT001, FBT002
 
         def forward(self, input: Tensor[*Shape, In]) -> Tensor[*Shape, Out]: ...
         def __call__(self, input: Tensor[*Shape, In]) -> Tensor[*Shape, Out]: ...
@@ -260,53 +259,6 @@ else:
     from torch.nn.functional import softmax
 
     class Tensor(Generic[*Shape], torch.Tensor): ...
-
-
-class GPTConfig(BaseModel):
-    # TODO: handle padding vocab_size to neaerest multiple of 64 somewhere
-    vocab_size: int
-    num_layers: int
-
-    # Literal types for static type-checking
-    if TYPE_CHECKING:
-        seq_len: Token
-        num_heads: Head
-        dim_model: DimModel
-        # dim_mlp: DimMLP
-    else:
-        seq_len: int
-        num_heads: int
-        dim_model: int
-        # dim_mlp: int
-
-    dropout: float
-    # TODO: separate bias for LayerNorm and Bias, input and output projections, attention and feedforward
-    bias: bool  # True: bias in Linears and LayerNorms, like GPT-2. False: a bit better and faster
-
-    @computed_field
-    @property
-    def dim_model_x3(self) -> DimModelX3:
-        return self.dim_model * 3
-
-    @computed_field
-    @property
-    def dim_mlp(self) -> DimMLP:
-        return self.dim_model * 3  # type: ignore  # noqa: PGH003
-
-    @computed_field
-    @property
-    def dim_head(self) -> DimHead:
-        if self.dim_model % self.num_heads != 0:
-            msg = "dim_model must be divisible by num_heads"
-            raise ValueError(msg)
-        return self.dim_model // self.num_heads
-
-    # @model_validator(mode="after")
-    # def check_embedding_size(self) -> Self:
-    #     if self.dim_model % self.num_heads != 0:
-    #         msg = "dim_model must be divisible by num_heads"
-    #         raise ValueError(msg)
-    #     return self
 
 
 class CausalSelfAttention(nn.Module):

@@ -76,7 +76,7 @@ def _log() -> None:
     ("results", "expected"),
     [
         (
-            "tests/config/config_1.py",
+            "tests/config/config_1.yaml",
             [
                 Result(iter=0, loss=4.236855, time=310),
                 Result(iter=20, loss=3.037239, time=8.65),

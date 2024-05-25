@@ -1,0 +1,242 @@
+{
+  "$defs": {
+    "AdamWConfig": {
+      "properties": {
+        "name": {
+          "const": "adam_w",
+          "enum": [
+            "adam_w"
+          ],
+          "title": "Name",
+          "type": "string"
+        },
+        "beta1": {
+          "exclusiveMaximum": 1.0,
+          "exclusiveMinimum": 0.0,
+          "title": "Beta1",
+          "type": "number"
+        },
+        "beta2": {
+          "exclusiveMaximum": 1.0,
+          "exclusiveMinimum": 0.0,
+          "title": "Beta2",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "beta1",
+        "beta2"
+      ],
+      "title": "AdamWConfig",
+      "type": "object"
+    },
+    "DType": {
+      "enum": [
+        "float16",
+        "float32",
+        "bfloat16"
+      ],
+      "title": "DType",
+      "type": "string"
+    },
+    "GPTConfig": {
+      "properties": {
+        "seq_len": {
+          "title": "Seq Len",
+          "type": "integer"
+        },
+        "dim_model": {
+          "title": "Dim Model",
+          "type": "integer"
+        },
+        "num_heads": {
+          "title": "Num Heads",
+          "type": "integer"
+        },
+        "num_layers": {
+          "title": "Num Layers",
+          "type": "integer"
+        },
+        "vocab_size": {
+          "title": "Vocab Size",
+          "type": "integer"
+        },
+        "bias": {
+          "title": "Bias",
+          "type": "boolean"
+        },
+        "dropout": {
+          "description": "Dropout probability, 0.0 to disable",
+          "exclusiveMaximum": 1.0,
+          "minimum": 0.0,
+          "title": "Dropout",
+          "type": "number"
+        }
+      },
+      "required": [
+        "seq_len",
+        "dim_model",
+        "num_heads",
+        "num_layers",
+        "vocab_size",
+        "bias",
+        "dropout"
+      ],
+      "title": "GPTConfig",
+      "type": "object"
+    },
+    "LearningRateConfig": {
+      "properties": {
+        "max": {
+          "exclusiveMinimum": 0.0,
+          "title": "Max",
+          "type": "number"
+        },
+        "min": {
+          "exclusiveMinimum": 0.0,
+          "title": "Min",
+          "type": "number"
+        },
+        "warmup_schedule": {
+          "const": "linear",
+          "enum": [
+            "linear"
+          ],
+          "title": "Warmup Schedule",
+          "type": "string"
+        },
+        "warmup_iters": {
+          "minimum": 0,
+          "title": "Warmup Iters",
+          "type": "integer"
+        },
+        "decay_schedule": {
+          "enum": [
+            "none",
+            "cosine_decay"
+          ],
+          "title": "Decay Schedule",
+          "type": "string"
+        }
+      },
+      "required": [
+        "max",
+        "min",
+        "warmup_schedule",
+        "warmup_iters",
+        "decay_schedule"
+      ],
+      "title": "LearningRateConfig",
+      "type": "object"
+    },
+    "OptimizationConfig": {
+      "properties": {
+        "max_iters": {
+          "description": "Maximum number of training iterations",
+          "exclusiveMinimum": 0,
+          "title": "Max Iters",
+          "type": "integer"
+        },
+        "grad_clip": {
+          "description": "Gradient clipping value, Inf to disable",
+          "exclusiveMinimum": 0.0,
+          "title": "Grad Clip",
+          "type": "number"
+        },
+        "weight_decay": {
+          "description": "Weight decay value, 0.0 to disable",
+          "minimum": 0.0,
+          "title": "Weight Decay",
+          "type": "number"
+        },
+        "learning_rate": {
+          "$ref": "#/$defs/LearningRateConfig"
+        },
+        "optimizer": {
+          "$ref": "#/$defs/AdamWConfig"
+        }
+      },
+      "required": [
+        "max_iters",
+        "grad_clip",
+        "weight_decay",
+        "learning_rate",
+        "optimizer"
+      ],
+      "title": "OptimizationConfig",
+      "type": "object"
+    },
+    "TrainConfig": {
+      "properties": {
+        "dataset": {
+          "title": "Dataset",
+          "type": "string"
+        },
+        "batch_size": {
+          "exclusiveMinimum": 0,
+          "title": "Batch Size",
+          "type": "integer"
+        },
+        "dtype": {
+          "$ref": "#/$defs/DType"
+        },
+        "optimization": {
+          "$ref": "#/$defs/OptimizationConfig"
+        },
+        "compile": {
+          "title": "Compile",
+          "type": "boolean"
+        },
+        "device_type": {
+          "enum": [
+            "cpu",
+            "cuda"
+          ],
+          "title": "Device Type",
+          "type": "string"
+        },
+        "seed_offset": {
+          "minimum": 0,
+          "title": "Seed Offset",
+          "type": "integer"
+        },
+        "out_dir": {
+          "default": "out",
+          "title": "Out Dir",
+          "type": "string"
+        },
+        "init_from": {
+          "default": "scratch",
+          "title": "Init From",
+          "type": "string"
+        }
+      },
+      "required": [
+        "dataset",
+        "batch_size",
+        "dtype",
+        "optimization",
+        "compile",
+        "device_type",
+        "seed_offset"
+      ],
+      "title": "TrainConfig",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "model": {
+      "$ref": "#/$defs/GPTConfig"
+    },
+    "train": {
+      "$ref": "#/$defs/TrainConfig"
+    }
+  },
+  "required": [
+    "model",
+    "train"
+  ],
+  "title": "RootConfig",
+  "type": "object"
+}

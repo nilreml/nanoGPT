@@ -370,3 +370,6 @@ no initial eval:
 2024-05-19 11:30:11.206012 [Result(iter=0, loss=4.210068, time=238.04, mfu=-100.0, max_alloc=0.1264), Result(iter=20, loss=3.100464, time=7.03, mfu=4.26, max_alloc=0.1362)]
 2024-05-19 11:30:13.006558 [Result(iter=0, loss=4.176258, time=240.1, mfu=-100.0, max_alloc=0.1301), Result(iter=20, loss=3.006781, time=7.55, mfu=3.99, max_alloc=0.1351)]
 2024-05-19 11:30:19.275659 [Result(iter=0, loss=4.21513, time=4527.21, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.939996, time=3.13, mfu=9.57, max_alloc=0.0082)]
+
+after pydantic config, real 2.163s:
+2024-05-25 09:40:40.371168 [Result(iter=0, loss=4.236855, time=295.57, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=7.37, mfu=4.06, max_alloc=0.1279)]
