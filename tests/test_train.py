@@ -83,21 +83,21 @@ def _log() -> None:
             ],
         ),
         (
-            "tests/config/config_2.py",
+            "tests/config/config_2.yaml",
             [
                 Result(iter=0, loss=4.210068, time=314),
                 Result(iter=20, loss=3.100468, time=9),
             ],
         ),
         (
-            "tests/config/config_3.py",
+            "tests/config/config_3.yaml",
             [
                 Result(iter=0, loss=4.176258, time=319),
                 Result(iter=20, loss=3.006874, time=9.7),
             ],
         ),
         (
-            "tests/config/config_4.py",
+            "tests/config/config_4.yaml",
             [
                 Result(iter=0, loss=4.215, time=5900),
                 Result(iter=20, loss=2.93995, time=3.6),

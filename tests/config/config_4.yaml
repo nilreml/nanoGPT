@@ -1,0 +1,31 @@
+model:
+  seq_len: 64
+  dim_model: 128
+  num_heads: 4
+  num_layers: 4
+  vocab_size: 0
+  bias: false
+  dropout: 0.1
+train:
+  dataset: shakespeare_char
+  batch_size: 64
+  dtype: bfloat16
+  optimization:
+    max_iters: 20
+    grad_clip: 1.0
+    weight_decay: 0.1
+    learning_rate:
+      max: 0.002
+      min: 0.0002
+      warmup_schedule: linear
+      warmup_iters: 10
+      decay_schedule: cosine_decay
+    optimizer:
+      name: adam_w
+      beta1: 0.9
+      beta2: 0.95
+  compile: true
+  device_type: cuda
+  seed_offset: 20
+  out_dir: /tmp/nanogpt/out-shakespeare-char
+  init_from: scratch
