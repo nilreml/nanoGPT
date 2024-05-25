@@ -397,6 +397,14 @@ class GPT(nn.Module):
                     std=0.02 / math.sqrt(2 * config.num_layers),
                 )
 
+    def _init_weights(self, module) -> None:
+        if isinstance(module, Linear):
+            nn.init.normal_(module.weight, mean=0.0, std=0.02)  # TODO: remove # type:ignore  # noqa: PGH003
+            if module.bias is not None:  # TODO: remove # type:ignore  # noqa: PGH003
+                nn.init.zeros_(module.bias)  # TODO: remove # type:ignore  # noqa: PGH003
+        elif isinstance(module, nn.Embedding):
+            nn.init.normal_(module.weight, mean=0.0, std=0.02)
+
     def forward(self, idx, targets=None):
         device = idx.device
         b, t = idx.size()
@@ -427,26 +435,6 @@ class GPT(nn.Module):
             loss = None
 
         return logits, loss
-
-    def get_num_params(self, non_embedding=True):  # noqa: FBT002
-        """
-        Return the number of parameters in the model.
-        For non-embedding count (default), the position embeddings get subtracted.
-        The token embeddings would too, except due to the parameter sharing these
-        params are actually used as weights in the final layer, so we include them.
-        """
-        n_params = sum(p.numel() for p in self.parameters())
-        if non_embedding:
-            n_params -= self.transformer.wpe.weight.numel()
-        return n_params
-
-    def _init_weights(self, module) -> None:
-        if isinstance(module, Linear):
-            nn.init.normal_(module.weight, mean=0.0, std=0.02)  # TODO: remove # type:ignore  # noqa: PGH003
-            if module.bias is not None:  # TODO: remove # type:ignore  # noqa: PGH003
-                nn.init.zeros_(module.bias)  # TODO: remove # type:ignore  # noqa: PGH003
-        elif isinstance(module, nn.Embedding):
-            nn.init.normal_(module.weight, mean=0.0, std=0.02)
 
     # def crop_seq_len(self, seq_len):
     #     # model surgery to decrease the block size if necessary
@@ -492,6 +480,18 @@ class GPT(nn.Module):
         print(f"using fused AdamW: {use_fused}")
 
         return optimizer
+
+    def get_num_params(self, non_embedding=True):  # noqa: FBT002
+        """
+        Return the number of parameters in the model.
+        For non-embedding count (default), the position embeddings get subtracted.
+        The token embeddings would too, except due to the parameter sharing these
+        params are actually used as weights in the final layer, so we include them.
+        """
+        n_params = sum(p.numel() for p in self.parameters())
+        if non_embedding:
+            n_params -= self.transformer.wpe.weight.numel()
+        return n_params
 
     def estimate_mfu(self, fwdbwd_per_iter, dt):
         """estimate model flops utilization (MFU) in units of A100 bfloat16 peak FLOPS"""
