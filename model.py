@@ -129,24 +129,33 @@ if TYPE_CHECKING:
         def size(self) -> tuple[*Shape]: ...
         def size(self: "Tensor", dim: int) -> int: ...  # type:ignore  # noqa: PGH003
 
-        @overload
-        def transpose(
-            self: "Tensor[First, Second, *ShapeRest]",
-            dim0: Literal[0],
-            dim1: Literal[1],
-        ) -> "Tensor[Second, First, *ShapeRest]": ...
-        @overload
-        def transpose(
-            self: "Tensor[First, Second, Third, *ShapeRest]",
-            dim0: Literal[1],
-            dim1: Literal[2],
-        ) -> "Tensor[First, Third, Second, *ShapeRest]": ...
+        # These shouldn't be used, always specify axes starting from the last one,
+        # allowing an arbitrary number of leading dimensions
+        # TODO: make use of torch's named axes
+        # @overload
+        # def transpose(
+        #     self: "Tensor[First, Second, *ShapeRest]",
+        #     dim0: Literal[0],
+        #     dim1: Literal[1],
+        # ) -> "Tensor[Second, First, *ShapeRest]": ...
+        # @overload
+        # def transpose(
+        #     self: "Tensor[First, Second, Third, *ShapeRest]",
+        #     dim0: Literal[1],
+        #     dim1: Literal[2],
+        # ) -> "Tensor[First, Third, Second, *ShapeRest]": ...
         @overload
         def transpose(
             self: "Tensor[*ShapeRest, LastButOne, Last]",
             dim0: Literal[-2],
             dim1: Literal[-1],
         ) -> "Tensor[*ShapeRest, Last, LastButOne]": ...
+        @overload
+        def transpose(
+            self: "Tensor[*ShapeRest, LastButTwo, LastButOne, Last]",
+            dim0: Literal[-3],
+            dim1: Literal[-2],
+        ) -> "Tensor[*ShapeRest, LastButOne, LastButTwo, Last]": ...
         def transpose(self, dim0: int, dim1: int) -> "Tensor": ...
 
         def matmul(
@@ -183,23 +192,6 @@ if TYPE_CHECKING:
             self,
             other,
         ) -> "Tensor": ...
-
-        # @overload
-        # def __add__(
-        #     self: "Tensor[First, Second, *ShapeRest]",
-        #     other: "Tensor[Literal[1], Literal[1], *ShapeRest]",
-        # ) -> "Tensor[First, Second, *ShapeRest]": ...
-
-        # @overload
-        # def __add__(
-        #     self: "Tensor[Literal[1], Literal[1], *ShapeRest]",
-        #     other: "Tensor[First, Second, *ShapeRest]",
-        # ) -> "Tensor[First, Second, *ShapeRest]": ...
-
-    #     # @overload
-    #     # @override
-    #     # def transpose(self: "Tensor[First, Second]", dim0: Literal[2], dim1: Literal[2]) -> "Tensor[Second, First]":
-    #     #     return super().transpose(1, 2)  # type: ignore  # noqa: PGH003
 
     def softmax(
         x: Tensor[*Shape],  # noqa: ARG001
@@ -258,8 +250,6 @@ else:
 
 
 class CausalSelfAttention(nn.Module):
-    # attn_bias: Tensor[Token, Token]
-
     def __init__(self, config: GPTConfig) -> None:
         super().__init__()
         self.head: Head = config.num_heads
@@ -300,9 +290,9 @@ class CausalSelfAttention(nn.Module):
         q, k, v = qkv.split(dim_model, dim=-1)
 
         # split last axis into heads with head dimensions, then swap token and head axes
-        q = q.view(batch, token, head, dim_head).transpose(1, 2)
-        k = k.view(batch, token, head, dim_head).transpose(1, 2)
-        v = v.view(batch, token, head, dim_head).transpose(1, 2)
+        q = q.view(batch, token, head, dim_head).transpose(-3, -2)
+        k = k.view(batch, token, head, dim_head).transpose(-3, -2)
+        v = v.view(batch, token, head, dim_head).transpose(-3, -2)
 
         # causal multi-head self-attention: Softmax( QKᵀ / ⎷dₕ ) V
         logits = q.matmul(k.transpose(-2, -1)) * (1.0 / math.sqrt(dim_head))  # QKᵀ / ⎷dₕ
@@ -315,7 +305,7 @@ class CausalSelfAttention(nn.Module):
 
         # re-assemble all head outputs
         # TODO: benchmark contiguous() in different places
-        y = y.transpose(1, 2).contiguous()  # swap token and head axes again
+        y = y.transpose(-3, -2).contiguous()  # swap token and head axes again
         y = y.view(batch, token, dim_model)  # collapse last two axes to put head outputs side-by-side
 
         # project output
@@ -493,7 +483,7 @@ class GPT(nn.Module):
         return n_params
 
     def estimate_mfu(self, fwdbwd_per_iter, dt):
-        """estimate model flops utilization (MFU) in units of A100 bfloat16 peak FLOPS"""
+        """estimate model flops utilization (MFU) in units of 3080 bfloat16 peak FLOPS"""
         # first estimate the number of flops we do per iteration.
         # see PaLM paper Appendix B as ref: https://arxiv.org/abs/2204.02311
         N = self.get_num_params()  # noqa: N806

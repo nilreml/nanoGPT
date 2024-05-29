@@ -74,18 +74,18 @@ run-to-run variance ~ 1%
 2024-04-26 23:37:46.945270 [Result(iter=0, loss=4.236855, time=290.21), Result(iter=20, loss=3.037239, time=8.52)]
 2024-04-26 23:37:48.949693 [Result(iter=0, loss=4.210068, time=291.37), Result(iter=20, loss=3.100468, time=8.84)]
 2024-04-26 23:37:50.983838 [Result(iter=0, loss=4.176258, time=298.88), Result(iter=20, loss=3.006874, time=9.63)]
-2024-04-26 23:37:58.606042 [Result(iter=0, loss=4.214901, time=5721.24), Result(iter=20, loss=2.939911, time=4.54)]  <-
+2024-04-26 23:37:58.606042 [Result(iter=0, loss=4.214901, time=5721.24), Result(iter=20, loss=2.939911, time=4.54)]
 
 pytorch 2.3:
-2024-04-27 14:57:05.695043 [Result(iter=0, loss=4.236855, time=302.05), Result(iter=20, loss=3.037256, time=7.76)]
+2024-04-27 14:57:05.695043 [Result(iter=0, loss=4.236855, time=302.05), Result(iter=20, loss=3.037256, time=7.76)]   <- +10% iter/s
 2024-04-27 14:57:07.851742 [Result(iter=0, loss=4.210068, time=304.62), Result(iter=20, loss=3.100464, time=8.06)]
 2024-04-27 14:57:10.040402 [Result(iter=0, loss=4.176258, time=310.52), Result(iter=20, loss=3.006781, time=8.85)]
-2024-04-27 14:57:46.065277 [Result(iter=0, loss=4.215122, time=33821.88), Result(iter=20, loss=2.940029, time=3.5)]  <- 130% iter/s
+2024-04-27 14:57:46.065277 [Result(iter=0, loss=4.215122, time=33821.88), Result(iter=20, loss=2.940029, time=3.5)]  <- +30% iter/s
 
 2024-04-27 14:58:17.355901 [Result(iter=0, loss=4.236855, time=306.4), Result(iter=20, loss=3.037256, time=7.71)]
 2024-04-27 14:58:19.510790 [Result(iter=0, loss=4.210068, time=309.91), Result(iter=20, loss=3.100464, time=8.02)]
 2024-04-27 14:58:21.696467 [Result(iter=0, loss=4.176258, time=317.76), Result(iter=20, loss=3.006781, time=8.95)]
-2024-04-27 14:58:29.193297 [Result(iter=0, loss=4.215122, time=5443.43), Result(iter=20, loss=2.940022, time=3.5)]   <- 130% iter/s
+2024-04-27 14:58:29.193297 [Result(iter=0, loss=4.215122, time=5443.43), Result(iter=20, loss=2.940022, time=3.5)]
 
 pytorch 2.3, max-autotune:
 2024-04-27 15:03:06.115835 [Result(iter=0, loss=4.236855, time=305.24), Result(iter=20, loss=3.037256, time=7.75)]
@@ -421,7 +421,17 @@ after pydantic config, real 2.163s:
 2024-05-29 21:36:37.816730 [Result(iter=0, loss=4.215145, time=5170.91, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.939945, time=3.59, mfu=8.34, max_alloc=0.0082)]
 
 # do_save = False (vram dataloader, 2 tensors per batch):
-2024-05-29 21:36:49.212740 [Result(iter=0, loss=4.236855, time=138.57, mfu=-100.0, max_alloc=0.1193), Result(iter=20, loss=3.037256, time=5.88, mfu=5.09, max_alloc=0.1292)]
+2024-05-29 21:36:49.212740 [Result(iter=0, loss=4.236855, time=138.57, mfu=-100.0, max_alloc=0.1193), Result(iter=20, loss=3.037256, time=5.88, mfu=5.09, max_alloc=0.1292)]    <- +25% iter/s
 2024-05-29 21:36:49.424121 [Result(iter=0, loss=4.210068, time=10.04, mfu=-100.0, max_alloc=0.1319), Result(iter=20, loss=3.100464, time=6.26, mfu=4.78, max_alloc=0.1375)]
 2024-05-29 21:36:49.591719 [Result(iter=0, loss=4.176258, time=8.33, mfu=-100.0, max_alloc=0.1332), Result(iter=20, loss=3.006781, time=6.99, mfu=4.31, max_alloc=0.1363)]
-2024-05-29 21:36:53.293947 [Result(iter=0, loss=4.215145, time=3457.63, mfu=-100.0, max_alloc=0.1226), Result(iter=20, loss=2.939815, time=2.38, mfu=12.58, max_alloc=0.0094)]  <- 150% iter/s
+2024-05-29 21:36:53.293947 [Result(iter=0, loss=4.215145, time=3457.63, mfu=-100.0, max_alloc=0.1226), Result(iter=20, loss=2.939815, time=2.38, mfu=12.58, max_alloc=0.0094)]  <- +50% iter/s
+
+2024-05-29 23:04:56.502128 [Result(iter=0, loss=4.236855, time=137.99, mfu=-100.0, max_alloc=0.1193), Result(iter=20, loss=3.037256, time=5.88, mfu=5.09, max_alloc=0.1292)]
+2024-05-29 23:04:56.658908 [Result(iter=0, loss=4.210068, time=9.98, mfu=-100.0, max_alloc=0.1319), Result(iter=20, loss=3.100464, time=6.23, mfu=4.8, max_alloc=0.1375)]
+2024-05-29 23:04:56.826834 [Result(iter=0, loss=4.176258, time=8.24, mfu=-100.0, max_alloc=0.1332), Result(iter=20, loss=3.006781, time=6.96, mfu=4.33, max_alloc=0.1363)]
+2024-05-29 23:05:00.454248 [Result(iter=0, loss=4.215145, time=3389.54, mfu=-100.0, max_alloc=0.1226), Result(iter=20, loss=2.939903, time=2.38, mfu=12.59, max_alloc=0.0094)]
+
+2024-05-29 23:05:38.182153 [Result(iter=0, loss=4.236855, time=135.3, mfu=-100.0, max_alloc=0.1193), Result(iter=20, loss=3.037256, time=5.87, mfu=5.1, max_alloc=0.1292)]
+2024-05-29 23:05:38.337983 [Result(iter=0, loss=4.210068, time=9.91, mfu=-100.0, max_alloc=0.1319), Result(iter=20, loss=3.100464, time=6.23, mfu=4.8, max_alloc=0.1375)]
+2024-05-29 23:05:38.508603 [Result(iter=0, loss=4.176258, time=8.4, mfu=-100.0, max_alloc=0.1332), Result(iter=20, loss=3.006781, time=6.95, mfu=4.34, max_alloc=0.1363)]
+2024-05-29 23:05:42.104332 [Result(iter=0, loss=4.215145, time=3352.16, mfu=-100.0, max_alloc=0.1226), Result(iter=20, loss=2.939842, time=2.38, mfu=12.58, max_alloc=0.0094)]
