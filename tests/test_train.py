@@ -17,7 +17,7 @@ def results(request: pytest.FixtureRequest) -> list[Result]:
     config_path = Path(request.param)
     config = RootConfig.model_validate_yaml(config_path.read_text())
 
-    return train(config=config, do_save=True)
+    return train(config=config, do_save=False)
 
 
 @pytest.fixture(scope="session")
@@ -28,7 +28,7 @@ def _log() -> None:
 
 @pytest.mark.usefixtures("_log")
 @pytest.mark.parametrize(
-    ("results", "expected"),
+    ("results", "expected_results"),
     [
         (
             "tests/config/config_1.yaml",
@@ -63,17 +63,19 @@ def _log() -> None:
     ],
     indirect=["results"],
 )
-def test_train(results: list[Result], expected: list[Result]) -> None:
-    assert len(results) == len(expected)
+def test_train(results: list[Result], expected_results: list[Result]) -> None:
+    assert len(results) == len(expected_results)
 
     msg = f"{datetime.now()} {[r.round_trip() for r in results]}\n"  # noqa: DTZ005
     with Path("tests/results.txt").open("a") as f:
         f.write(msg)
 
-    for r, e in zip(results, expected, strict=True):
-        assert r.iter == e.iter
-        assert math.isclose(r.loss, e.loss, rel_tol=5e-5)
-        assert r.time <= e.time
+    loss_rel_tol = 5e-5
+
+    for result, expected in zip(results, expected_results, strict=True):
+        assert result.iter == expected.iter
+        assert math.isclose(result.loss, expected.loss, rel_tol=loss_rel_tol)
+        assert result.time <= expected.time
 
     # pytest.fail(str(results))
     # pytest.fail()

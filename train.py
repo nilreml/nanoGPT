@@ -30,6 +30,10 @@ class Result(Model):
 
 
 def train(config: RootConfig, *, do_save: bool = False) -> list[Result]:  # noqa: C901, PLR0915, PLR0912
+    if do_save:
+        print("conventional dataloader, saving reproducible train data, ", end="")
+    else:
+        print("vram dataloader, loading reproducible train data, ", end="")
     print(f"tokens per iteration will be: {config.tokens_per_iter:,}")
 
     os.makedirs(config.train.out_dir, exist_ok=True)  # noqa: PTH103
