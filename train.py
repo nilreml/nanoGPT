@@ -29,25 +29,6 @@ class Result(Model):
     max_alloc: Annotated[float, PlainSerializer(lambda x: round(x, 4), return_type=float)] = 0.0
 
 
-# def load_data(path: Path, device_type: str, seq_len: int) -> tuple[Tensor, Tensor]:
-#     data = np.memmap(path, dtype=np.uint16, mode="r")
-
-#     last_idx = len(data) - config.model.seq_len
-
-#     x = torch.stack([torch.from_numpy((data[0 : i + config.model.seq_len]).astype(np.int64)) for i in ix])  # type: ignore  # noqa: PGH003
-
-#     ix = torch.randint(len(data) - config.model.seq_len, (config.train.batch_size,))  # type: ignore  # noqa: PGH003
-#     x = torch.stack([torch.from_numpy((data[i : i + config.model.seq_len]).astype(np.int64)) for i in ix])  # type: ignore  # noqa: PGH003
-#     y = torch.stack([torch.from_numpy((data[i + 1 : i + 1 + config.model.seq_len]).astype(np.int64)) for i in ix])
-#     # print(x)
-#     if device_type == "cuda":
-#         # pin arrays x,y, which allows us to move them to GPU asynchronously (non_blocking=True)
-#         x, y = x.pin_memory().to(device_type, non_blocking=True), y.pin_memory().to(device_type, non_blocking=True)
-#     else:
-#         x, y = x.to(device_type), y.to(device_type)
-#     return x, y
-
-
 def train(config: RootConfig, *, do_save: bool = False) -> list[Result]:  # noqa: C901, PLR0915, PLR0912
     print(f"tokens per iteration will be: {config.tokens_per_iter:,}")
 

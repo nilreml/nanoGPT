@@ -414,13 +414,13 @@ after pydantic config, real 2.163s:
 2024-05-25 12:13:45.406713 [Result(iter=0, loss=4.176258, time=151.38, mfu=-100.0, max_alloc=0.1319), Result(iter=20, loss=3.006781, time=8.45, mfu=3.57, max_alloc=0.1351)]
 2024-05-25 12:13:51.103412 [Result(iter=0, loss=4.215122, time=5402.71, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.939892, time=3.56, mfu=8.4, max_alloc=0.0082)]
 
-# do_save = True:
+# do_save = True (conventional dataloader):
 2024-05-29 21:36:31.683857 [Result(iter=0, loss=4.236855, time=278.45, mfu=-100.0, max_alloc=0.1181), Result(iter=20, loss=3.037256, time=7.36, mfu=4.06, max_alloc=0.1279)]
 2024-05-29 21:36:32.007147 [Result(iter=0, loss=4.210068, time=148.19, mfu=-100.0, max_alloc=0.1307), Result(iter=20, loss=3.100464, time=7.74, mfu=3.87, max_alloc=0.1362)]
 2024-05-29 21:36:32.347303 [Result(iter=0, loss=4.176258, time=151.32, mfu=-100.0, max_alloc=0.1319), Result(iter=20, loss=3.006781, time=8.4, mfu=3.59, max_alloc=0.1351)]
 2024-05-29 21:36:37.816730 [Result(iter=0, loss=4.215145, time=5170.91, mfu=-100.0, max_alloc=0.1214), Result(iter=20, loss=2.939945, time=3.59, mfu=8.34, max_alloc=0.0082)]
 
-# do_save = False:
+# do_save = False (vram dataloader, 2 tensors per batch):
 2024-05-29 21:36:49.212740 [Result(iter=0, loss=4.236855, time=138.57, mfu=-100.0, max_alloc=0.1193), Result(iter=20, loss=3.037256, time=5.88, mfu=5.09, max_alloc=0.1292)]
 2024-05-29 21:36:49.424121 [Result(iter=0, loss=4.210068, time=10.04, mfu=-100.0, max_alloc=0.1319), Result(iter=20, loss=3.100464, time=6.26, mfu=4.78, max_alloc=0.1375)]
 2024-05-29 21:36:49.591719 [Result(iter=0, loss=4.176258, time=8.33, mfu=-100.0, max_alloc=0.1332), Result(iter=20, loss=3.006781, time=6.99, mfu=4.31, max_alloc=0.1363)]
