@@ -1,3 +1,4 @@
+name: config_1
 model:
   seq_len: 64
   dim_model: 128
@@ -8,6 +9,7 @@ model:
   dropout: 0
 train:
   dataset: shakespeare_char
+  train_data: config_1_train.safetensors
   batch_size: 64
   dtype: bfloat16
   optimization:

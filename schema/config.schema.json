@@ -41,6 +41,7 @@
       "type": "string"
     },
     "GPTConfig": {
+      "description": "Pydantic model containing GPT LLM configuration.",
       "properties": {
         "seq_len": {
           "title": "Seq Len",
@@ -168,6 +169,7 @@
       "type": "object"
     },
     "TrainConfig": {
+      "description": "Pydantic model containing training configuration.",
       "properties": {
         "dataset": {
           "title": "Dataset",
@@ -225,7 +227,12 @@
       "type": "object"
     }
   },
+  "description": "Pydantic model containing gpt model and training configuration.",
   "properties": {
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
     "model": {
       "$ref": "#/$defs/GPTConfig"
     },
@@ -234,6 +241,7 @@
     }
   },
   "required": [
+    "name",
     "model",
     "train"
   ],

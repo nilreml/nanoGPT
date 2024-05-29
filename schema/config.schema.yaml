@@ -31,6 +31,7 @@ $defs:
     title: DType
     type: string
   GPTConfig:
+    description: Pydantic model containing GPT LLM configuration.
     properties:
       bias:
         title: Bias
@@ -130,6 +131,7 @@ $defs:
     title: OptimizationConfig
     type: object
   TrainConfig:
+    description: Pydantic model containing training configuration.
     properties:
       batch_size:
         exclusiveMinimum: 0
@@ -173,12 +175,17 @@ $defs:
     - seed_offset
     title: TrainConfig
     type: object
+description: Pydantic model containing gpt model and training configuration.
 properties:
   model:
     $ref: '#/$defs/GPTConfig'
+  name:
+    title: Name
+    type: string
   train:
     $ref: '#/$defs/TrainConfig'
 required:
+- name
 - model
 - train
 title: RootConfig

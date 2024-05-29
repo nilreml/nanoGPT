@@ -291,7 +291,6 @@ class CausalSelfAttention(nn.Module):
             persistent=False,
         )
 
-    # def __call__(self, x: Tensor[Batch, Token, Dim]) -> Tensor[Batch, Token, Dim]: ...
     def forward(self, x: Tensor[Batch, Token, DimModel]) -> Tensor[Batch, Token, DimModel]:
         # shorthand names for tensor axes
         batch, token, dim_model = x.size()  # batch size, sequence length, model dimensions
@@ -327,6 +326,10 @@ class CausalSelfAttention(nn.Module):
         z = self.out_proj(y)
 
         return self.resid_dropout(z)
+
+    if TYPE_CHECKING:
+
+        def __call__(self, x: Tensor[Batch, Token, DimModel]) -> Tensor[Batch, Token, DimModel]: ...
 
 
 class MLP(nn.Module):

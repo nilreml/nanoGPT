@@ -8,9 +8,11 @@ import os
 import pickle
 import time
 from contextlib import nullcontext
+from pathlib import Path
 from typing import Annotated
 
 import numpy as np
+import safetensors.torch
 import torch
 from pydantic import PlainSerializer
 from torch import Tensor
@@ -27,7 +29,26 @@ class Result(Model):
     max_alloc: Annotated[float, PlainSerializer(lambda x: round(x, 4), return_type=float)] = 0.0
 
 
-def train(config: RootConfig) -> list[Result]:
+# def load_data(path: Path, device_type: str, seq_len: int) -> tuple[Tensor, Tensor]:
+#     data = np.memmap(path, dtype=np.uint16, mode="r")
+
+#     last_idx = len(data) - config.model.seq_len
+
+#     x = torch.stack([torch.from_numpy((data[0 : i + config.model.seq_len]).astype(np.int64)) for i in ix])  # type: ignore  # noqa: PGH003
+
+#     ix = torch.randint(len(data) - config.model.seq_len, (config.train.batch_size,))  # type: ignore  # noqa: PGH003
+#     x = torch.stack([torch.from_numpy((data[i : i + config.model.seq_len]).astype(np.int64)) for i in ix])  # type: ignore  # noqa: PGH003
+#     y = torch.stack([torch.from_numpy((data[i + 1 : i + 1 + config.model.seq_len]).astype(np.int64)) for i in ix])
+#     # print(x)
+#     if device_type == "cuda":
+#         # pin arrays x,y, which allows us to move them to GPU asynchronously (non_blocking=True)
+#         x, y = x.pin_memory().to(device_type, non_blocking=True), y.pin_memory().to(device_type, non_blocking=True)
+#     else:
+#         x, y = x.to(device_type), y.to(device_type)
+#     return x, y
+
+
+def train(config: RootConfig, *, do_save: bool = False) -> list[Result]:  # noqa: C901, PLR0915, PLR0912
     print(f"tokens per iteration will be: {config.tokens_per_iter:,}")
 
     os.makedirs(config.train.out_dir, exist_ok=True)  # noqa: PTH103
@@ -43,22 +64,38 @@ def train(config: RootConfig) -> list[Result]:
     # poor man's data loader
     data_dir = os.path.join("data", config.train.dataset)  # noqa: PTH118
 
-    def get_batch(split) -> tuple[Tensor, Tensor]:
-        # Recreate np.memmap every batch to avoid a memory leak, as per
-        # https://stackoverflow.com/questions/45132940/numpy-memmap-memory-usage-want-to-iterate-once/61472122#61472122
-        if split == "train":
-            data = np.memmap(os.path.join(data_dir, "train.bin"), dtype=np.uint16, mode="r")  # noqa: PTH118
-        else:
-            data = np.memmap(os.path.join(data_dir, "val.bin"), dtype=np.uint16, mode="r")  # noqa: PTH118
-        ix = torch.randint(len(data) - config.model.seq_len, (config.train.batch_size,))  # type: ignore  # noqa: PGH003
-        x = torch.stack([torch.from_numpy((data[i : i + config.model.seq_len]).astype(np.int64)) for i in ix])  # type: ignore  # noqa: PGH003
-        y = torch.stack([torch.from_numpy((data[i + 1 : i + 1 + config.model.seq_len]).astype(np.int64)) for i in ix])
-        if device_type == "cuda":
-            # pin arrays x,y, which allows us to move them to GPU asynchronously (non_blocking=True)
-            x, y = x.pin_memory().to(device_type, non_blocking=True), y.pin_memory().to(device_type, non_blocking=True)
-        else:
-            x, y = x.to(device_type), y.to(device_type)
-        return x, y
+    if do_save:
+        train_data_dict: dict[str, Tensor] = {}
+    else:
+        # load training data using safetensors
+        train_data_dict = safetensors.torch.load_file(Path(f"tests/config/{config.name}_train.safetensors"), device=device_type)
+
+    def get_batch(split: str, iter_num: int) -> tuple[Tensor, Tensor]:
+        # print(f"get_batch({split}, {iter_num})")
+        if do_save:
+            # Recreate np.memmap every batch to avoid a memory leak, as per
+            # https://stackoverflow.com/questions/45132940/numpy-memmap-memory-usage-want-to-iterate-once/61472122#61472122
+            if split == "train":
+                data = np.memmap(os.path.join(data_dir, "train.bin"), dtype=np.uint16, mode="r")  # noqa: PTH118
+            else:
+                data = np.memmap(os.path.join(data_dir, "val.bin"), dtype=np.uint16, mode="r")  # noqa: PTH118
+            ix = torch.randint(len(data) - config.model.seq_len, (config.train.batch_size,))  # type: ignore  # noqa: PGH003
+            x = torch.stack([torch.from_numpy((data[i : i + config.model.seq_len]).astype(np.int64)) for i in ix])  # type: ignore  # noqa: PGH003
+            y = torch.stack([torch.from_numpy((data[i + 1 : i + 1 + config.model.seq_len]).astype(np.int64)) for i in ix])
+
+            if split == "train" and f"batch_{iter_num}_x" not in train_data_dict:
+                train_data_dict[f"batch_{iter_num}_x"] = x.detach().clone()
+                train_data_dict[f"batch_{iter_num}_y"] = y.detach().clone()
+                # train_data.append((x, y))
+
+            if device_type == "cuda":
+                # pin arrays x,y, which allows us to move them to GPU asynchronously (non_blocking=True)
+                x, y = x.pin_memory().to(device_type, non_blocking=True), y.pin_memory().to(device_type, non_blocking=True)
+            else:
+                x, y = x.to(device_type), y.to(device_type)
+            return x, y
+
+        return train_data_dict[f"batch_{iter_num}_x"], train_data_dict[f"batch_{iter_num}_y"]
 
     eval_iters = 20
     eval_interval = 250
@@ -76,8 +113,6 @@ def train(config: RootConfig) -> list[Result]:
             meta = pickle.load(f)  # noqa: S301
         meta_vocab_size = meta["vocab_size"]
         print(f"found vocab_size = {meta_vocab_size} (inside {meta_path})")
-
-    checkpoint = None
 
     if config.train.init_from == "scratch":
         # init a new model from scratch
@@ -107,14 +142,12 @@ def train(config: RootConfig) -> list[Result]:
         device_type,
     )
 
-    checkpoint = None  # free up memory
-
     # compile the model
     # https://pytorch.org/docs/stable/generated/torch.compile.html
     # https://github.com/pytorch/pytorch/blob/main/torch/_inductor/config.py
     if config.train.compile:
-        print("compiling the model... (takes a ~minute)")
-        unoptimized_model = model
+        print("compiling the model...")
+        # unoptimized_model = model
         model: GPT = torch.compile(
             model,
             fullgraph=True,
@@ -125,13 +158,13 @@ def train(config: RootConfig) -> list[Result]:
 
     # helps estimate an arbitrarily accurate loss over either split using many batches
     @torch.no_grad()
-    def estimate_loss():
+    def estimate_loss(iter_num: int):  # noqa: ANN202
         model.eval()
         out = {}
         for split in ["train", "val"]:
             losses = torch.zeros(eval_iters)
             for k in range(eval_iters):
-                X, Y = get_batch(split)  # noqa: N806
+                X, Y = get_batch(split=split, iter_num=iter_num)  # noqa: N806
                 with ctx:
                     logits, loss = model(X, Y)
                 losses[k] = loss.item()
@@ -161,7 +194,7 @@ def train(config: RootConfig) -> list[Result]:
         return config.learning_rate.min + coeff * (config.learning_rate.max - config.learning_rate.min)
 
     # training loop
-    X, Y = get_batch("train")  # fetch the very first batch
+    X, Y = get_batch(split="train", iter_num=0)  # fetch the very first batch  # noqa: N806
 
     def filter_dt(dt: list[float]) -> float:
         return min(dt)
@@ -180,8 +213,8 @@ def train(config: RootConfig) -> list[Result]:
             param_group["lr"] = lr
 
         # evaluate the loss on train/val sets and write checkpoints
-        if iter_num % eval_interval == 0:
-            losses = estimate_loss()
+        if iter_num % eval_interval == 0 and do_save:
+            losses = estimate_loss(iter_num=iter_num)
             print(f"step {iter_num}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
             if losses["val"] < best_val_loss:
                 best_val_loss = losses["val"]
@@ -193,7 +226,7 @@ def train(config: RootConfig) -> list[Result]:
         with ctx:
             logits, loss = model(X, Y)
         # immediately async prefetch next batch while model is doing the forward pass on the GPU
-        X, Y = get_batch("train")
+        X, Y = get_batch("train", iter_num=iter_num + 1)  # noqa: N806
         # backward pass, with gradient scaling if training in fp16
         scaler.scale(loss).backward()
 
@@ -224,14 +257,16 @@ def train(config: RootConfig) -> list[Result]:
                 running_mfu = mfu if running_mfu == -1.0 else 0.9 * running_mfu + 0.1 * mfu
 
             results.append(Result(iter=iter_num, loss=lossf, time=dt * 1000, mfu=running_mfu * 100, max_alloc=max_mem_alloc))
-            print(
-                f"iter {iter_num}: loss {lossf:.6f}, time {dt*1000:.2f}ms, mfu {running_mfu*100:.2f}%, max alloc {max_mem_alloc:.4f}GB",
-            )
+            # print(f"iter {iter_num}: loss {lossf:.6f}, time {dt*1000:.2f}ms, mfu {running_mfu*100:.2f}%, max alloc {max_mem_alloc:.4f}GB")
         iter_num += 1
         local_iter_num += 1
 
         # termination conditions
         if iter_num > config.train.optimization.max_iters:
             break
+
+    # save training data using safetensors
+    if do_save:
+        safetensors.torch.save_file(train_data_dict, Path(f"tests/config/{config.name}_train.safetensors"))
 
     return results

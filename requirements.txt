@@ -12,3 +12,5 @@ pydantic
 jaxtyping
 
 jsf
+typer
+safetensors

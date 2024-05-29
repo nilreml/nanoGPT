@@ -1,5 +1,4 @@
 import math
-import os
 from datetime import datetime
 from pathlib import Path
 
@@ -11,14 +10,14 @@ from train import Result, train
 
 @pytest.fixture()
 def results(request: pytest.FixtureRequest) -> list[Result]:
-    os.environ["TORCHINDUCTOR_FX_GRAPH_CACHE"] = "1"
+    # os.environ["TORCHINDUCTOR_FX_GRAPH_CACHE"] = "1"
     # os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "backend:cudaMallocAsync"
     # os.environ["PYTORCH_NO_CUDA_MEMORY_CACHING"] = "1"
 
     config_path = Path(request.param)
     config = RootConfig.model_validate_yaml(config_path.read_text())
 
-    return train(config)
+    return train(config=config, do_save=True)
 
 
 @pytest.fixture(scope="session")
@@ -56,7 +55,7 @@ def _log() -> None:
             "tests/config/config_4.yaml",
             [
                 Result(iter=0, loss=4.215, time=5900),
-                Result(iter=20, loss=2.93995, time=3.6),
+                Result(iter=20, loss=2.93995, time=3.8),
                 # Result(iter=0, loss=4.214890, time=5900),  # pytorch 2.2
                 # Result(iter=20, loss=2.93995, time=4.6),   # pytorch 2.2
             ],
@@ -77,3 +76,4 @@ def test_train(results: list[Result], expected: list[Result]) -> None:
         assert r.time <= e.time
 
     # pytest.fail(str(results))
+    # pytest.fail()

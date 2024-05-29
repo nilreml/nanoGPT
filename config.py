@@ -206,7 +206,7 @@ class OptimizationConfig(Model):
 class TrainConfig(Model):
     """Pydantic model containing training configuration."""
 
-    dataset: str
+    dataset: Path
     batch_size: PositiveInt
     dtype: DType
     optimization: OptimizationConfig
@@ -225,6 +225,8 @@ class TrainConfig(Model):
 
 class RootConfig(Model):
     """Pydantic model containing gpt model and training configuration."""
+
+    name: str
 
     model: GPTConfig
     train: TrainConfig
