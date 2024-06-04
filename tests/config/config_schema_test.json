@@ -1,0 +1,38 @@
+{
+    "model": {
+        "bias": false,
+        "dim_model": 128,
+        "dropout": 0.0,
+        "num_heads": 4,
+        "num_layers": 4,
+        "seq_len": 64,
+        "vocab_size": 0
+    },
+    "name": "config_1",
+    "train": {
+        "batch_size": 64,
+        "compile": false,
+        "dataset": "shakespeare_char",
+        "device_type": "cuda",
+        "dtype": "bfloat16",
+        "optimization": {
+            "grad_clip": 0.0,
+            "learning_rate": {
+                "decay_schedule": "cosine_decay",
+                "max": 0.001,
+                "min": 0.0001,
+                "warmup_iters": 10,
+                "warmup_schedule": "linear"
+            },
+            "max_iters": 20,
+            "optimizer": {
+                "beta1": 0.9,
+                "beta2": 0.95,
+                "name": "adam_w"
+            },
+            "weight_decay": 0.1
+        },
+        "out_dir": "/tmp/nanogpt/out-shakespeare-char",
+        "seed_offset": 0
+    }
+}

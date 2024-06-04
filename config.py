@@ -43,7 +43,6 @@ class Model(pydantic.BaseModel):
         strict=True,
         validate_default=True,
         revalidate_instances="always",
-        ser_json_inf_nan="constants",
         # use_enum_values=True,
     )
 
@@ -117,8 +116,6 @@ DimMLP = Literal[480]  # DimModel*2.5
 class GPTConfig(Model):
     """Pydantic model containing GPT LLM configuration."""
 
-    # TODO: handle padding vocab_size to neaerest multiple of 64 somewhere
-
     # Literal types for static type-checking
     if TYPE_CHECKING:
         seq_len: Token
@@ -134,10 +131,11 @@ class GPTConfig(Model):
     num_layers: int
     vocab_size: int
 
+    # TODO: handle padding vocab_size to neaerest multiple of 64 somewhere
     # TODO: separate bias for LayerNorm and Bias, input and output projections, attention and feedforward
     bias: bool  # True: bias in Linears and LayerNorms, like GPT-2. False: a bit better and faster
 
-    dropout: ZeroInclToOneExclFloat = Field(description="Dropout probability, 0.0 to disable")
+    dropout: Annotated[ZeroInclToOneExclFloat, Field(description="Dropout probability, 0.0 to disable")]
 
     @computed_field
     @property
@@ -155,6 +153,8 @@ class GPTConfig(Model):
     def dim_mlp(self) -> DimMLP:
         return self.dim_model * 3  # type: ignore  # noqa: PGH003
 
+    # TODO: specify model using dim_head and num_heads, make dim_model a computed field
+
     @computed_field
     @property
     def dim_head(self) -> DimHead:
@@ -164,7 +164,7 @@ class GPTConfig(Model):
         return self.dim_model // self.num_heads
 
     @model_validator(mode="after")
-    def check_embedding_size(self) -> Self:
+    def check_model_dimension(self) -> Self:
         if self.dim_model % self.num_heads != 0:
             msg = "dim_model must be divisible by num_heads"
             raise ValueError(msg)
@@ -186,16 +186,17 @@ class LearningRateConfig(Model):
 
 
 class OptimizationConfig(Model):
-    max_iters: PositiveInt = Field(description="Maximum number of training iterations")
-    grad_clip: PositiveFloat = Field(description="Gradient clipping value, Inf to disable")
-    weight_decay: NonNegativeFloat = Field(description="Weight decay value, 0.0 to disable")
+    max_iters: Annotated[PositiveInt, Field(description="Maximum number of training iterations")]
+    grad_clip: Annotated[NonNegativeFloat, Field(description="Gradient clipping value, 0 to disable")]
+    weight_decay: Annotated[NonNegativeFloat, Field(description="Weight decay value, 0 to disable")]
+
     learning_rate: LearningRateConfig
     optimizer: AdamWConfig
 
     @computed_field
     @property
     def use_grad_clip(self) -> bool:
-        return self.grad_clip < float("inf")
+        return self.grad_clip > 0.0
 
     @computed_field
     @property
@@ -208,12 +209,12 @@ class TrainConfig(Model):
 
     dataset: Path
     batch_size: PositiveInt
-    dtype: DType
     optimization: OptimizationConfig
+    seed_offset: NonNegativeInt
 
+    dtype: DType
     compile: bool
     device_type: Literal["cpu", "cuda"]  # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1' etc., or try 'mps' on macbooks
-    seed_offset: NonNegativeInt
 
     out_dir: str = "out"
     init_from: str = "scratch"  # 'scratch' or 'resume' or 'gpt2*'
@@ -227,7 +228,6 @@ class RootConfig(Model):
     """Pydantic model containing gpt model and training configuration."""
 
     name: str
-
     model: GPTConfig
     train: TrainConfig
 
@@ -238,7 +238,9 @@ class RootConfig(Model):
 
 
 def main() -> None:
-    schema = RootConfig.model_json_schema(mode="validation")  # mode="serialization"
+    mode = "validation"
+    # mode = "serialization"
+    schema = RootConfig.model_json_schema(mode=mode)
 
     schema_path = Path("schema").resolve()
 

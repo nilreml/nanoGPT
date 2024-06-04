@@ -140,13 +140,13 @@
           "type": "integer"
         },
         "grad_clip": {
-          "description": "Gradient clipping value, Inf to disable",
-          "exclusiveMinimum": 0.0,
+          "description": "Gradient clipping value, 0 to disable",
+          "minimum": 0.0,
           "title": "Grad Clip",
           "type": "number"
         },
         "weight_decay": {
-          "description": "Weight decay value, 0.0 to disable",
+          "description": "Weight decay value, 0 to disable",
           "minimum": 0.0,
           "title": "Weight Decay",
           "type": "number"
@@ -172,6 +172,7 @@
       "description": "Pydantic model containing training configuration.",
       "properties": {
         "dataset": {
+          "format": "path",
           "title": "Dataset",
           "type": "string"
         },
@@ -180,11 +181,16 @@
           "title": "Batch Size",
           "type": "integer"
         },
-        "dtype": {
-          "$ref": "#/$defs/DType"
-        },
         "optimization": {
           "$ref": "#/$defs/OptimizationConfig"
+        },
+        "seed_offset": {
+          "minimum": 0,
+          "title": "Seed Offset",
+          "type": "integer"
+        },
+        "dtype": {
+          "$ref": "#/$defs/DType"
         },
         "compile": {
           "title": "Compile",
@@ -197,11 +203,6 @@
           ],
           "title": "Device Type",
           "type": "string"
-        },
-        "seed_offset": {
-          "minimum": 0,
-          "title": "Seed Offset",
-          "type": "integer"
         },
         "out_dir": {
           "default": "out",
@@ -217,11 +218,11 @@
       "required": [
         "dataset",
         "batch_size",
-        "dtype",
         "optimization",
+        "seed_offset",
+        "dtype",
         "compile",
-        "device_type",
-        "seed_offset"
+        "device_type"
       ],
       "title": "TrainConfig",
       "type": "object"

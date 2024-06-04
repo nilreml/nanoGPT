@@ -435,3 +435,8 @@ after pydantic config, real 2.163s:
 2024-05-29 23:05:38.337983 [Result(iter=0, loss=4.210068, time=9.91, mfu=-100.0, max_alloc=0.1319), Result(iter=20, loss=3.100464, time=6.23, mfu=4.8, max_alloc=0.1375)]
 2024-05-29 23:05:38.508603 [Result(iter=0, loss=4.176258, time=8.4, mfu=-100.0, max_alloc=0.1332), Result(iter=20, loss=3.006781, time=6.95, mfu=4.34, max_alloc=0.1363)]
 2024-05-29 23:05:42.104332 [Result(iter=0, loss=4.215145, time=3352.16, mfu=-100.0, max_alloc=0.1226), Result(iter=20, loss=2.939842, time=2.38, mfu=12.58, max_alloc=0.0094)]
+
+2024-06-04 19:56:01.298968 [Result(iter=0, loss=4.236855, time=134.85, mfu=-100.0, max_alloc=0.1193), Result(iter=20, loss=3.037256, time=5.89, mfu=5.08, max_alloc=0.1292)]
+2024-06-04 19:56:01.459113 [Result(iter=0, loss=4.210068, time=10.16, mfu=-100.0, max_alloc=0.1319), Result(iter=20, loss=3.100464, time=6.23, mfu=4.8, max_alloc=0.1375)]
+2024-06-04 19:56:01.630386 [Result(iter=0, loss=4.176258, time=8.27, mfu=-100.0, max_alloc=0.1332), Result(iter=20, loss=3.006781, time=6.98, mfu=4.32, max_alloc=0.1363)]
+2024-06-04 19:56:05.249543 [Result(iter=0, loss=4.215145, time=3385.78, mfu=-100.0, max_alloc=0.1226), Result(iter=20, loss=2.939936, time=2.38, mfu=12.59, max_alloc=0.0094)]

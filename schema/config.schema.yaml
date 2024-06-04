@@ -104,8 +104,8 @@ $defs:
   OptimizationConfig:
     properties:
       grad_clip:
-        description: Gradient clipping value, Inf to disable
-        exclusiveMinimum: 0.0
+        description: Gradient clipping value, 0 to disable
+        minimum: 0.0
         title: Grad Clip
         type: number
       learning_rate:
@@ -118,7 +118,7 @@ $defs:
       optimizer:
         $ref: '#/$defs/AdamWConfig'
       weight_decay:
-        description: Weight decay value, 0.0 to disable
+        description: Weight decay value, 0 to disable
         minimum: 0.0
         title: Weight Decay
         type: number
@@ -141,6 +141,7 @@ $defs:
         title: Compile
         type: boolean
       dataset:
+        format: path
         title: Dataset
         type: string
       device_type:
@@ -168,11 +169,11 @@ $defs:
     required:
     - dataset
     - batch_size
-    - dtype
     - optimization
+    - seed_offset
+    - dtype
     - compile
     - device_type
-    - seed_offset
     title: TrainConfig
     type: object
 description: Pydantic model containing gpt model and training configuration.

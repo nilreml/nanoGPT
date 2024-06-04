@@ -1,11 +1,17 @@
 {
     "python.analysis.typeCheckingMode": "standard",
-    "insert-unicode.favorites": {
-        "directories": {},
-        "items": [
-            [
-                773
-            ]
-        ]
-    }
+    "yaml.schemas": {
+        //"http://json.schemastore.org/composer": ["/*"],
+        "schema/config.schema.json": [
+            "config_*.yaml"
+        ],
+    },
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "**/config_*.json"
+            ],
+            "url": "./schema/config.schema.json"
+        }
+    ]
 }

@@ -122,6 +122,9 @@ fixable = ["ALL"]
     "D104", # Allow missing docstring in __init__.py -> standard practice
 ]
 
+[tool.ruff.lint.flake8-boolean-trap]
+extend-allowed-calls = ["pydantic.Field", "pydantic.AllowInfNan"]
+
 [tool.ruff.format]
 # Documentation: https://docs.astral.sh/ruff/settings/#format
 docstring-code-format = true
